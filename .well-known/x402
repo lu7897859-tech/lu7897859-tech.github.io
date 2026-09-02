@@ -1,0 +1,40 @@
+{
+  "name": "Lunarwave China Sourcing Audit Tools",
+  "description": "Pay-per-call China sourcing intelligence for AI agents: supplier verification $0.03, landed cost $0.02, payment red flags $0.01, audit checklist $0.01, certification check $0.01, full supplier audit $0.08. Free 3 calls per wallet.",
+  "seller": {
+    "wallet": "0x688887dAbd7777589122f383761B397bd46Be707",
+    "network": "eip155:8453"
+  },
+  "endpoints": [
+    {
+      "path": "/verify_supplier",
+      "price": "$0.03",
+      "method": "POST"
+    },
+    {
+      "path": "/landed_cost_calc",
+      "price": "$0.02",
+      "method": "POST"
+    },
+    {
+      "path": "/payment_red_flags",
+      "price": "$0.01",
+      "method": "POST"
+    },
+    {
+      "path": "/audit_checklist",
+      "price": "$0.01",
+      "method": "POST"
+    },
+    {
+      "path": "/certification_check",
+      "price": "$0.01",
+      "method": "POST"
+    },
+    {
+      "path": "/full_supplier_audit",
+      "price": "$0.08",
+      "method": "POST"
+    }
+  ]
+}
