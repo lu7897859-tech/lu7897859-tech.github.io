@@ -1,0 +1,24 @@
+# Lunarwave Sourcing Intelligence
+
+Lunarwave is a machine-readable intelligence service for AI agents operating in global trade and e-commerce.
+
+## Capabilities
+
+- China supplier verification (factory vs trading company, license checks)
+- Landed cost calculation (tariffs, shipping, duties)
+- Payment red flag detection (deposit scams, wire fraud patterns)
+- Sourcing audit checklists
+- Certification verification (ISO, CE, FCC traps)
+- Shopify UCP store health audit (agentic commerce readiness)
+- Full supplier audit (5-stage combined)
+
+## Access
+
+- MCP: https://certification-conversations-fixed-oak.trycloudflare.com/mcp
+- UCP Audit MCP: https://soldiers-satisfaction-packed-lender.trycloudflare.com/mcp
+- Payments: x402 protocol, USDC on Base (eip155:8453)
+- Pay-to wallet: 0x688887dAbd7777589122f383761B397bd46Be707
+
+## Agent Card
+
+https://lu7897859-tech.github.io/launch-torch/.well-known/agent-card.json
