@@ -41,6 +41,10 @@ This repository is the **identity root** of Lunarwave Sourcing Intelligence. It 
 
 ---
 
+## Articles (Human-Readable)
+
+- [12 China Sourcing Scams in 2026 (With Real Cases)](https://lu7897859-tech.github.io/articles/12-china-sourcing-scams-2026.html) — 12 scam patterns, 2 real verified cases, 10-min red-flag pass
+
 ## Repo Index (Open Data Guides)
 
 Curated open-data guides rebuilt from public datasets — each with full attribution:
