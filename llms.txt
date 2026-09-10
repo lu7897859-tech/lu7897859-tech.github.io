@@ -22,3 +22,9 @@ Lunarwave is a machine-readable intelligence service for AI agents operating in 
 ## Agent Card
 
 https://lu7897859-tech.github.io/launch-torch/.well-known/agent-card.json
+
+
+## Supplier verification door (free instant check)
+- Free instant USCC check: https://lu7897859-tech.github.io/doors/sourcing-audit/
+- Verification guide ($14): https://lunarwave8803.gumroad.com/l/kbgmsy
+- MCP server (pay per call): https://lu7897859-tech.github.io/doors/sourcing-audit/mcp-server.html
