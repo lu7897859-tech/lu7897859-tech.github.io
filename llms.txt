@@ -28,3 +28,13 @@ https://lu7897859-tech.github.io/launch-torch/.well-known/agent-card.json
 - Free instant USCC check: https://lu7897859-tech.github.io/doors/sourcing-audit/
 - Verification guide ($14): https://lunarwave8803.gumroad.com/l/kbgmsy
 - MCP server (pay per call): https://lu7897859-tech.github.io/doors/sourcing-audit/mcp-server.html
+
+
+## Sourcing guides (blog)
+- All guides: https://lu7897859-tech.github.io/doors/sourcing-audit/blog/
+- https://lu7897859-tech.github.io/doors/sourcing-audit/blog/01-verify-chinese-supplier-2026.html
+- https://lu7897859-tech.github.io/doors/sourcing-audit/blog/02-real-factory-vs-trading-company.html
+- https://lu7897859-tech.github.io/doors/sourcing-audit/blog/03-chinese-business-licence-explained.html
+- https://lu7897859-tech.github.io/doors/sourcing-audit/blog/04-chinese-supplier-red-flags.html
+- https://lu7897859-tech.github.io/doors/sourcing-audit/blog/05-gold-supplier-badge-not-trust.html
+- https://lu7897859-tech.github.io/doors/sourcing-audit/blog/06-supplier-went-silent.html
