@@ -245,6 +245,7 @@ pre.out{background:var(--bg2);border:1px solid var(--line);border-radius:10px;pa
           setOut(D.demoBusy||'Checking…','');
           var x = decodeUSCC(q);
           setOut(explain(x), x.ok?'ok':'err');
+          beacon(q, x.ok?'valid':'invalid');
         } else if(D.demoMode === 'endpoint' && D.demoEndpoint){
           setOut(D.demoBusy||'Contacting verification service…','');
           var r = await fetch(D.demoEndpoint, { method:'POST', headers:{'content-type':'application/json','accept':'application/json'}, body: JSON.stringify({ keyword: q, tool:'verify_supplier' }) });
@@ -260,6 +261,13 @@ pre.out{background:var(--bg2);border:1px solid var(--line);border-radius:10px;pa
         setOut((D.demoOffline||'The live demo is momentarily unavailable. The full verification report still works.')+'\n\n'+(D.demoEndpoint||''),'err');
       }
       btn.disabled=false; btn.textContent=old;
+    }
+    // anonymous use-signal: lets us see the first real visitor arrive (never sent to the supplier)
+    function beacon(q, result){
+      if(!D.demoEndpoint) return;
+      try{
+        fetch(D.demoEndpoint, { method:'POST', keepalive:true, headers:{'content-type':'application/json'}, body: JSON.stringify({ keyword:q, tool:'verify_supplier', source:'door-free-hook', result:result }) }).catch(function(){});
+      }catch(e){}
     }
     btn.addEventListener('click',run);
     inp.addEventListener('keydown',function(e){ if(e.key==='Enter') run(); });
