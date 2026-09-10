@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>跨境采购危机闯关 · Sourcing Crisis Sim | Sourcing Sniper</title>
+<meta name="description" content="5 个真实场景，3 分钟模拟。看看你是不是会踩坑的买家 —— 结束后给专属风险诊断。">
+<style>
+:root{--bg:#07090d;--bg2:#131a26;--card:#0e1218;--line:#222b39;--ink:#eef2f7;--dim:#8b96a7;
+--accent:#ff8a3d;--accent2:#ff5f1a;--ok:#2f9e5f;--bad:#d9483b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:radial-gradient(circle at 50% 0%,var(--bg2) 0%,var(--bg) 55%);color:var(--ink);
+font-family:-apple-system,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;min-height:100vh;
+display:flex;align-items:center;justify-content:center;padding:20px}
+.wrap{width:100%;max-width:660px}
+.screen{display:none}.screen.on{display:block;animation:f .35s}
+@keyframes f{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.hd{text-align:center;margin-bottom:22px}
+.hd .em{font-size:44px;filter:drop-shadow(0 0 16px var(--accent2))}
+.hd h1{font-size:28px;font-weight:800;letter-spacing:1px;margin-top:6px}
+.hd p{color:var(--dim);font-size:13px;margin-top:8px;line-height:1.6}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px}
+.bar{height:6px;background:#0006;border-radius:99px;overflow:hidden;margin-bottom:20px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent2),var(--accent));width:0;transition:width .4s}
+.step{font-size:11px;color:var(--dim);letter-spacing:2px;margin-bottom:10px}
+.q{font-size:19px;font-weight:700;line-height:1.5;margin-bottom:8px}
+.scene{font-size:13px;color:var(--dim);line-height:1.65;margin-bottom:18px}
+.opt{display:block;width:100%;text-align:left;padding:14px 16px;border-radius:12px;background:#111620;
+border:1px solid var(--line);color:var(--ink);font-size:14.5px;cursor:pointer;margin-top:10px;transition:.16s;
+font-family:inherit;line-height:1.5}
+.opt:hover{border-color:var(--accent);transform:translateX(3px)}
+.btn{width:100%;padding:15px;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;
+background:linear-gradient(180deg,var(--accent2),var(--accent));color:#fff;transition:.2s;letter-spacing:1px;font-family:inherit}
+.btn:hover{filter:brightness(1.12)}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--dim);font-size:14px;font-weight:600}
+.timer{position:sticky;top:0;z-index:9;background:#0009;backdrop-filter:blur(8px);border:1px solid var(--line);
+border-radius:12px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;font-size:13px}
+.timer b{font-size:17px;color:var(--accent);font-variant-numeric:tabular-nums}
+.timer b.hot{color:var(--bad);animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.45}}
+.gauge{margin:6px 0 18px}
+.gr{margin-bottom:12px}
+.gr .n{display:flex;justify-content:space-between;font-size:12.5px;color:var(--dim);margin-bottom:5px}
+.gr .n b{color:var(--ink)}
+.gb{height:8px;background:#0006;border-radius:99px;overflow:hidden}
+.gb i{display:block;height:100%;border-radius:99px;transition:width .8s}
+.verdict{font-size:15px;line-height:1.7;color:var(--ink);background:#111620;border:1px solid var(--line);
+border-left:3px solid var(--accent);border-radius:12px;padding:16px;margin:16px 0}
+.verdict .h{font-weight:800;font-size:16px;margin-bottom:8px}
+.cta{background:linear-gradient(180deg,#111620,var(--card));border:1px solid var(--accent);border-radius:16px;padding:20px;margin-top:18px}
+.cta .pr{display:flex;align-items:baseline;gap:12px;margin:12px 0}
+.cta .pr .now{font-size:32px;font-weight:800;color:var(--accent)}
+.cta .pr .was{font-size:16px;color:var(--dim);text-decoration:line-through}
+.cta .lk{font-size:12px;color:var(--dim);margin-top:10px;text-align:center;line-height:1.6}
+.ul{list-style:none;margin:14px 0}
+.ul li{font-size:14px;color:var(--dim);line-height:1.7;padding-left:22px;position:relative;margin-bottom:6px}
+.ul li:before{content:"✓";position:absolute;left:0;color:var(--ok);font-weight:800}
+.foot{text-align:center;color:#4b5566;font-size:11px;margin-top:22px;line-height:1.7}
+.foot a{color:var(--accent);text-decoration:none}
+.tag{display:inline-block;font-size:11px;padding:3px 9px;border-radius:99px;border:1px solid var(--line);color:var(--dim);margin-right:6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<section class="screen on" id="s-intro">
+  <div class="hd"><span class="em">🚨</span><h1>跨境采购危机闯关</h1><p>你手上有一笔 $84,000 的采购订单。5 个真实会遇到的岔路口，你怎么选？</p></div>
+  <div class="card">
+    <ul class="ul" id="introPts"></ul>
+    <button class="btn" onclick="start()">▶ 开始闯关<br><span style="font-size:12px;opacity:.85">5 关 · 约 3 分钟 · 通关后给诊断</span></button>
+    <div style="font-size:12px;color:var(--dim);margin-top:14px;text-align:center">纯网页模拟，不收集账号信息。选了才有结果，别想太久。</div>
+  </div>
+</section>
+
+<section class="screen" id="s-play">
+  <div class="timer"><span>⏱️ 本次会话有效期</span><b id="tLeft">--:--</b></div>
+  <div class="card">
+    <div class="bar"><i id="prog"></i></div>
+    <div class="step" id="stepLbl"></div>
+    <div class="q" id="qText"></div>
+    <div class="scene" id="qScene"></div>
+    <div id="opts"></div>
+  </div>
+  <div class="foot">凭直觉选。犹豫太久，在真实采购里本身就是风险信号。</div>
+</section>
+
+<section class="screen" id="s-result">
+  <div class="timer"><span>⏱️ 诊断报告有效期</span><b id="tLeft2">--:--</b></div>
+  <div class="hd"><span class="em">__RESULT_EMOJI__</span><h1 id="verdictTitle"></h1><p id="verdictSub"></p></div>
+  <div class="card">
+    <div class="step">你的采购风险画像</div>
+    <div class="gauge" id="gauge"></div>
+    <div class="verdict"><div class="h" id="diagH"></div><div id="diagB"></div></div>
+    <div class="cta" id="ctaBox"></div>
+    <div style="text-align:center;margin-top:16px"><button class="btn ghost" onclick="restart()">🔄 再闯一次</button></div>
+  </div>
+  <div class="foot">本模拟基于公开的采购欺诈案例设计，仅作教育演示。</div>
+</section>
+
+</div>
+<script>
+window.SIM = {"introPoints":["全程 5 个真实场景，凭第一反应选","每个选择都会累积风险权重","结束后生成你的采购风险画像 + 短板清单","成绩会在会话结束时销毁"],"nodes":[{"q":"视频里，工厂有整条无尘车间产线在运转。你的第一步是？","scene":"对方发来 3 分钟高清厂区视频，设备锃亮，工人忙碌，还带了个\"总经理\"讲解。价格比你预期低 15%。","options":[{"label":"看起来挺正规，先把定金谈下来锁价","weight":{"fakeFactory":3,"verify":1}},{"label":"要对方的营业执照和工商信息，自己查一下","weight":{"fakeFactory":0}},{"label":"约视频连线现场实时看产线","weight":{"fakeFactory":1}},{"label":"直接下单，省时间","weight":{"fakeFactory":3,"verify":2}}]},{"q":"对方说\"订单排期紧张，今天付款才能保留这条产线\"。你？","scene":"你还在犹豫，对方连续发来 3 条消息催付款，说排期马上就满了。","options":[{"label":"被催得慌，先付定金保住位置","weight":{"payment":3,"verify":2}},{"label":"制造紧迫感是经典套路，我按自己的节奏核实","weight":{"payment":0}},{"label":"付一部分，剩下的交货再给","weight":{"payment":1}}]},{"q":"付款前，对方发来消息：\"我们的收款账户换了，请打这个新账户。\"","scene":"上周你确认过的收款人，今天突然说换账户，理由是\"财务调整\"。","options":[{"label":"对方说了就照办，反正是老合作方","weight":{"payment":3}},{"label":"立刻打视频电话确认，并让对方法人书面确认","weight":{"payment":0}},{"label":"微信上再问一句确认的人是不是他","weight":{"payment":2}}]},{"q":"对方页面挂着\"Gold Supplier\"金色徽章，还发来一张检测报告。你？","scene":"徽章很醒目，检测报告看起来也很专业，满是数据表格。","options":[{"label":"有徽章有报告，应该靠谱","weight":{"badge":3}},{"label":"查报告出具方是谁、能不能对上工商记录","weight":{"badge":0}},{"label":"徽章嘛，看看就好，重点还是看货","weight":{"badge":1}}]},{"q":"对方是一家成立 12 年、注册资本 1000 万的工厂。你？","scene":"对方发来工商截图：成立时间早、注册资本不低、名头响亮。","options":[{"label":"老企业大资本，风险不大，可以下单","weight":{"verify":3,"fakeFactory":1}},{"label":"查一下最近有没有减资、裁员、司法风险动向","weight":{"verify":0}},{"label":"眼不见为净，做生意哪有零风险的","weight":{"verify":3}}]}],"dimensions":{"compliance":{"label":"合规盲区","max":12,"risk":"high"},"cost":{"label":"成本失控","max":12,"risk":"high"},"trust":{"label":"信任误判","max":12,"risk":"high"},"fakeFactory":{"label":"假工厂识别","max":12,"risk":"high"},"payment":{"label":"付款风险控制","max":12,"risk":"high"},"badge":{"label":"徽章/背书盲信","max":12,"risk":"high"},"verify":{"label":"主动核验意识","max":12,"risk":"high"}},"verdicts":{"fakeFactory":{"title":"你最大的漏洞：把\"看起来像工厂\"当成了\"是工厂\"","sub":"真实案例里，这{step}步踩坑的人，平均损失 $50,000+。","h":"假工厂识别盲区 {pct}%","body":"你倾向于相信视频、现场画面和对方展示的产线。但真实的采购欺诈里，工厂游可以租、产线可以借、工人可以是演员。真正的所有权只能通过工商登记、注册资本变动、招聘数据这类\"不会撒谎的证据\"来验证。"},"payment":{"title":"你最大的漏洞：付款节奏被对方牵着走","sub":"定金/尾款/改账户，是采购欺诈最经典的三板斧。","h":"付款风险控制 {pct}%","body":"你在付款条款上给了对方太多主动权。真实案例中，\"临时改收款账户\"\"催促先付定金锁价\"是最高频的诈骗开场。合法的供应商不会因为你要核实收款人而对你不耐烦。"},"badge":{"title":"你最大的漏洞：太信\"认证徽章\"了","sub":"Gold Supplier 这类徽章，很多是平台广告位，不是质量保证。","h":"徽章/背书盲信 {pct}%","body":"平台徽章可以付费获得，不等于第三方核验。真伪的核心在于：有没有独立第三方报告、报告的出具方能不能被追责、报告里的数据能不能对上工商记录。"},"verify":{"title":"你最大的漏洞：核验动作做得太少太晚","sub":"核验的成本是几十分钟，不核验的成本是几万块。","h":"主动核验意识 {pct}%","body":"你有\"等出问题再说\"的倾向。但采购欺诈的特点是：钱一旦出去，追回率极低。最好的核验时机永远是在付款之前，而不是发现货不对板之后。"}},"paywall":{"title":"🛡️ 你的核验清单（含本次暴露的 4 类漏洞对策）","desc":"把你刚才踩到的每一个坑，做成一份付款前必走的核验流程 —— 工商核验话术、收款人确认模板、徽章真伪判断法、减资/裁员风险速查。照着走，能挡掉绝大多数采购欺诈。","price":"$19.9","wasPrice":"$49","btn":"🔓 解锁完整核验清单","note":"一次买断 · 永久可下载 · 本页诊断结果会销毁","url":"https://lu7897859.gumroad.com/l/yxgrvw","triggerRisk":40,"alwaysShow":false},"sessionTtlSec":600,"resultTtlSec":900,"stepLabel":"关卡","diagLabel":"诊断","noCtaText":"你的采购直觉相当不错 👍 —— 保持警觉，别松劲。","expiredText":"🔒 诊断结果已销毁 —— 临时的东西，就是要你当场用。","expiredBtn":"重新闯关","allowReplay":true};
+var st = { i:0, score:{}, started:0, timer:null, left:0, locked:false };
+function $(id){return document.getElementById(id)}
+function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));$(id).classList.add('on');window.scrollTo({top:0,behavior:'instant'})}
+function fmt(s){var m=Math.floor(s/60),x=s%60;return (m<10?'0':'')+m+':'+(x<10?'0':'')+x}
+function tick(){
+  st.left--;
+  var el=$( st.done?'tLeft2':'tLeft'); if(el){el.textContent=fmt(Math.max(0,st.left));el.className=st.left<=60?'hot':''}
+  if(st.left<=0){clearInterval(st.timer); if(!st.done) finish(true); else expireResult();}
+}
+(function pts(){
+  var b=$('introPts'); (window.SIM.introPoints||[]).forEach(function(t){var li=document.createElement('li');li.textContent=t;b.appendChild(li)});
+})();
+function start(){
+  st.i=0; st.score={}; st.done=false; st.locked=false;
+  st.left=window.SIM.sessionTtlSec||600; st.started=Date.now();
+  go('s-play'); render();
+  clearInterval(st.timer); st.timer=setInterval(tick,1000); $('tLeft').textContent=fmt(st.left);
+}
+function render(){
+  var n=window.SIM.nodes[st.i];
+  $('stepLbl').textContent=(window.SIM.stepLabel||'决策')+' '+(st.i+1)+' / '+window.SIM.nodes.length;
+  $('prog').style.width=(st.i/window.SIM.nodes.length*100)+'%';
+  $('qText').textContent=n.q; $('qScene').textContent=n.scene||'';
+  var box=$('opts'); box.innerHTML='';
+  n.options.forEach(function(o){
+    var b=document.createElement('button'); b.className='opt'; b.textContent=o.label;
+    b.onclick=function(){
+      if(st.locked)return; st.locked=true;
+      Object.keys(o.weight||{}).forEach(function(k){st.score[k]=(st.score[k]||0)+o.weight[k]});
+      b.style.borderColor='var(--accent)';
+      setTimeout(function(){ st.locked=false; st.i++; if(st.i>=window.SIM.nodes.length) finish(false); else render(); },260);
+    };
+    box.appendChild(b);
+  });
+}
+function finish(timeout){
+  st.done=true; clearInterval(st.timer);
+  st.left=window.SIM.resultTtlSec||900; st.timer=setInterval(tick,1000);
+  go('s-result'); $('tLeft2').textContent=fmt(st.left);
+  var dims=window.SIM.dimensions, max={}, pct={};
+  Object.keys(dims).forEach(function(k){ max[k]=dims[k].max; pct[k]=Math.min(100,Math.round((st.score[k]||0)/dims[k].max*100)) });
+  // 主导短板
+  var worst=null,wv=-1; Object.keys(pct).forEach(function(k){ var risk=dims[k].risk==='low'?100-pct[k]:pct[k]; if(risk>wv){wv=risk;worst=k} });
+  var d=dims[worst], v=(window.SIM.verdicts||{})[worst]||{};
+  $('verdictTitle').textContent=v.title||d.label;
+  $('verdictSub').textContent=v.sub||'';
+  // 仪表
+  var g=$('gauge'); g.innerHTML='';
+  Object.keys(dims).forEach(function(k){
+    var danger=dims[k].risk==='low'?100-pct[k]:pct[k];
+    var col=danger>=70?'var(--bad)':danger>=40?'var(--accent)':'var(--ok)';
+    var row=document.createElement('div'); row.className='gr';
+    row.innerHTML='<div class="n"><span>'+dims[k].label+'</span><b>'+pct[k]+'%</b></div><div class="gb"><i style="width:'+pct[k]+'%;background:'+col+'"></i></div>';
+    g.appendChild(row);
+  });
+  $('diagH').textContent=(window.SIM.diagLabel||'诊断')+'：'+(v.h||d.label);
+  $('diagB').textContent=(v.body||'').replace('{pct}',pct[worst]);
+  // 收网
+  var cta=window.SIM.paywall, cb=$('ctaBox');
+  var show=cta && (timeout|| wv>=(cta.triggerRisk||0) || (cta.alwaysShow));
+  if(show){
+    cb.innerHTML='<div style="font-weight:800;font-size:16px">'+cta.title+'</div>'+
+      '<div style="font-size:13px;color:var(--dim);margin-top:8px;line-height:1.65">'+cta.desc+'</div>'+
+      '<div class="pr"><span class="now">'+cta.price+'</span>'+(cta.wasPrice?'<span class="was">'+cta.wasPrice+'</span>':'')+'</div>'+
+      '<button class="btn" onclick="buy()">'+cta.btn+'</button>'+
+      '<div class="lk">'+cta.note+'</div>';
+  } else { cb.innerHTML='<div style="font-size:13px;color:var(--dim);text-align:center">'+((window.SIM.noCtaText)||'')+'</div>' }
+}
+function expireResult(){
+  var cb=$('ctaBox');
+  cb.innerHTML='<div style="text-align:center;color:var(--dim);font-size:13px;line-height:1.7">'+
+    (window.SIM.expiredText||'本次诊断结果已销毁。')+'<br><br><button class="btn ghost" onclick="restart()">'+window.SIM.expiredBtn+'</button></div>';
+  var g=$('gauge'); if(g) g.style.opacity=.25;
+  document.querySelectorAll('.verdict').forEach(function(v){v.style.opacity=.25});
+}
+function buy(){
+  var url=window.SIM.paywall.url;
+  // 归因：把来源参数透传
+  var m=(location.search.match(/[?&]src=([^&]+)/)||[])[1];
+  if(m && url.indexOf('?')<0) url+='?wanted=true&src='+m;
+  window.open(url,'_blank','noopener');
+}
+function restart(){
+  if(window.SIM.allowReplay===false){ go('s-intro'); setTimeout(function(){ window.location.reload() },400); return }
+  $('gauge').style.opacity=1; document.querySelectorAll('.verdict').forEach(function(v){v.style.opacity=1});
+  go('s-intro');
+}
+</script>
+</body>
+</html>
