@@ -29,7 +29,6 @@ https://lu7897859-tech.github.io/launch-torch/.well-known/agent-card.json
 - Verification guide ($14): https://lunarwave8803.gumroad.com/l/kbgmsy
 - MCP server (pay per call): https://lu7897859-tech.github.io/doors/sourcing-audit/mcp-server.html
 
-
 ## Sourcing guides (blog)
 - All guides: https://lu7897859-tech.github.io/doors/sourcing-audit/blog/
 - https://lu7897859-tech.github.io/doors/sourcing-audit/blog/01-verify-chinese-supplier-2026.html
@@ -38,3 +37,13 @@ https://lu7897859-tech.github.io/launch-torch/.well-known/agent-card.json
 - https://lu7897859-tech.github.io/doors/sourcing-audit/blog/04-chinese-supplier-red-flags.html
 - https://lu7897859-tech.github.io/doors/sourcing-audit/blog/05-gold-supplier-badge-not-trust.html
 - https://lu7897859-tech.github.io/doors/sourcing-audit/blog/06-supplier-went-silent.html
+- https://lu7897859-tech.github.io/doors/sourcing-audit/blog/07-alibaba-supplier-scam-get-money-back.html
+- https://lu7897859-tech.github.io/doors/sourcing-audit/blog/08-chinese-supplier-sent-wrong-product.html
+- https://lu7897859-tech.github.io/doors/sourcing-audit/blog/09-how-to-check-chinese-company-lawsuits.html
+- https://lu7897859-tech.github.io/doors/sourcing-audit/blog/10-who-owns-a-chinese-company-shareholders-ubo.html
+- https://lu7897859-tech.github.io/doors/sourcing-audit/blog/11-chinese-company-due-diligence-framework.html
+- https://lu7897859-tech.github.io/doors/sourcing-audit/blog/12-verify-supplier-business-license-china.html
+- https://lu7897859-tech.github.io/doors/sourcing-audit/blog/13-china-company-credit-report-whats-inside.html
+- https://lu7897859-tech.github.io/doors/sourcing-audit/blog/14-china-import-requirements-2026.html
+- https://lu7897859-tech.github.io/doors/sourcing-audit/blog/15-alibaba-vs-1688-price-difference.html
+- https://lu7897859-tech.github.io/doors/sourcing-audit/blog/16-china-sourcing-payment-terms-safest.html
