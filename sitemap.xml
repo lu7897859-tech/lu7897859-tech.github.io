@@ -1,25 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://lu7897859-tech.github.io/</loc><lastmod>2026-09-08</lastmod></url>
-  <url><loc>https://lu7897859-tech.github.io/llms.txt</loc><lastmod>2026-09-08</lastmod></url>
-  <url><loc>https://lu7897859-tech.github.io/.well-known/mcp.json</loc><lastmod>2026-09-08</lastmod></url>
-  <url><loc>https://lu7897859-tech.github.io/.well-known/x402.json</loc><lastmod>2026-09-08</lastmod></url>
-  <url><loc>https://lu7897859-tech.github.io/README.md</loc><lastmod>2026-09-08</lastmod></url>
-  <url><loc>https://lu7897859-tech.github.io/supplier-risk-check/</loc><lastmod>2026-09-08</lastmod></url>
-  <url><loc>https://lu7897859-tech.github.io/launch-torch/</loc><lastmod>2026-09-08</lastmod></url>
-  <url><loc>https://lu7897859-tech.github.io/launch-torch/llms.txt</loc><lastmod>2026-09-08</lastmod></url>
-  <url><loc>https://lu7897859-tech.github.io/auto-ai-cluster/</loc><lastmod>2026-09-08</lastmod></url>
-<url><loc>https://lu7897859-tech.github.io/doors/sourcing-audit/</loc><lastmod>2026-09-10T05:56:36.494Z</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
-<url><loc>https://lu7897859-tech.github.io/doors/sourcing-audit/free-uscc-check.html</loc><lastmod>2026-09-10T05:56:36.494Z</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
-<url><loc>https://lu7897859-tech.github.io/doors/sourcing-audit/verify-china-supplier-guide.html</loc><lastmod>2026-09-10T05:56:36.494Z</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
-<url><loc>https://lu7897859-tech.github.io/doors/sourcing-audit/china-business-bundle.html</loc><lastmod>2026-09-10T05:56:36.494Z</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
-<url><loc>https://lu7897859-tech.github.io/doors/sourcing-audit/payment-red-flags.html</loc><lastmod>2026-09-10T05:56:36.494Z</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
-<url><loc>https://lu7897859-tech.github.io/doors/sourcing-audit/mcp-server.html</loc><lastmod>2026-09-10T05:56:36.494Z</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
-<url><loc>https://lu7897859-tech.github.io/doors/sourcing-audit/blog/</loc><lastmod>2026-09-10T06:15:08.430Z</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-<url><loc>https://lu7897859-tech.github.io/doors/sourcing-audit/blog/01-verify-chinese-supplier-2026.html</loc><lastmod>2026-09-10T06:15:08.430Z</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-<url><loc>https://lu7897859-tech.github.io/doors/sourcing-audit/blog/02-real-factory-vs-trading-company.html</loc><lastmod>2026-09-10T06:15:08.430Z</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-<url><loc>https://lu7897859-tech.github.io/doors/sourcing-audit/blog/03-chinese-business-licence-explained.html</loc><lastmod>2026-09-10T06:15:08.430Z</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-<url><loc>https://lu7897859-tech.github.io/doors/sourcing-audit/blog/04-chinese-supplier-red-flags.html</loc><lastmod>2026-09-10T06:15:08.430Z</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-<url><loc>https://lu7897859-tech.github.io/doors/sourcing-audit/blog/05-gold-supplier-badge-not-trust.html</loc><lastmod>2026-09-10T06:15:08.430Z</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
-<url><loc>https://lu7897859-tech.github.io/doors/sourcing-audit/blog/06-supplier-went-silent.html</loc><lastmod>2026-09-10T06:15:08.430Z</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://lu7897859-tech.github.io/</loc><lastmod>2026-09-10</lastmod><priority>1.0</priority></url>
+  <url><loc>https://lu7897859-tech.github.io/llms.txt</loc><lastmod>2026-09-10</lastmod><priority>0.8</priority></url>
+  <url><loc>https://lu7897859-tech.github.io/.well-known/mcp.json</loc><lastmod>2026-09-10</lastmod><priority>0.6</priority></url>
+  <url><loc>https://lu7897859-tech.github.io/.well-known/x402.json</loc><lastmod>2026-09-10</lastmod><priority>0.6</priority></url>
+  <url><loc>https://lu7897859-tech.github.io/supplier-risk-check/</loc><lastmod>2026-09-10</lastmod><priority>0.7</priority></url>
+  <url><loc>https://lu7897859-tech.github.io/doors/sourcing-audit/</loc><lastmod>2026-09-10</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://lu7897859-tech.github.io/doors/sourcing-audit/free-uscc-check.html</loc><lastmod>2026-09-10</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://lu7897859-tech.github.io/doors/sourcing-audit/verify-china-supplier-guide.html</loc><lastmod>2026-09-10</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://lu7897859-tech.github.io/doors/sourcing-audit/china-business-bundle.html</loc><lastmod>2026-09-10</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://lu7897859-tech.github.io/doors/sourcing-audit/payment-red-flags.html</loc><lastmod>2026-09-10</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://lu7897859-tech.github.io/doors/sourcing-audit/mcp-server.html</loc><lastmod>2026-09-10</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://lu7897859-tech.github.io/doors/sourcing-audit/blog/</loc><lastmod>2026-09-10</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://lu7897859-tech.github.io/doors/sourcing-audit/blog/01-verify-chinese-supplier-2026.html</loc><lastmod>2026-09-10</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://lu7897859-tech.github.io/doors/sourcing-audit/blog/02-real-factory-vs-trading-company.html</loc><lastmod>2026-09-10</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://lu7897859-tech.github.io/doors/sourcing-audit/blog/03-chinese-business-licence-explained.html</loc><lastmod>2026-09-10</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://lu7897859-tech.github.io/doors/sourcing-audit/blog/04-chinese-supplier-red-flags.html</loc><lastmod>2026-09-10</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://lu7897859-tech.github.io/doors/sourcing-audit/blog/05-gold-supplier-badge-not-trust.html</loc><lastmod>2026-09-10</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://lu7897859-tech.github.io/doors/sourcing-audit/blog/06-supplier-went-silent.html</loc><lastmod>2026-09-10</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://lu7897859-tech.github.io/doors/sourcing-audit/blog/07-alibaba-supplier-scam-get-money-back.html</loc><lastmod>2026-09-10</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://lu7897859-tech.github.io/doors/sourcing-audit/blog/08-chinese-supplier-sent-wrong-product.html</loc><lastmod>2026-09-10</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://lu7897859-tech.github.io/doors/sourcing-audit/blog/09-how-to-check-chinese-company-lawsuits.html</loc><lastmod>2026-09-10</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://lu7897859-tech.github.io/doors/sourcing-audit/blog/10-who-owns-a-chinese-company-shareholders-ubo.html</loc><lastmod>2026-09-10</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://lu7897859-tech.github.io/doors/sourcing-audit/blog/11-chinese-company-due-diligence-framework.html</loc><lastmod>2026-09-10</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://lu7897859-tech.github.io/doors/sourcing-audit/blog/12-verify-supplier-business-license-china.html</loc><lastmod>2026-09-10</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://lu7897859-tech.github.io/doors/sourcing-audit/blog/13-china-company-credit-report-whats-inside.html</loc><lastmod>2026-09-10</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://lu7897859-tech.github.io/doors/sourcing-audit/blog/14-china-import-requirements-2026.html</loc><lastmod>2026-09-10</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://lu7897859-tech.github.io/doors/sourcing-audit/blog/15-alibaba-vs-1688-price-difference.html</loc><lastmod>2026-09-10</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://lu7897859-tech.github.io/doors/sourcing-audit/blog/16-china-sourcing-payment-terms-safest.html</loc><lastmod>2026-09-10</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
 </urlset>
