@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>树洞 · 说完就烧 | 树洞</title>
+<meta name="description" content="匿名说一句心里话，30 秒后自动焚毁。限 3 人可见。纯娱乐恶作剧玩具。">
+<style>
+:root{
+  --bg:#0a0910; --card:#141020; --line:#2a2340; --ink:#efeaf5;
+  --dim:#8f86a8; --accent:#9d6bff; --accent2:#6b8bff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:radial-gradient(circle at 50% 0%,#171327 0%,#0a0910 60%);color:var(--ink);
+  font-family:-apple-system,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  min-height:100%;display:flex;align-items:center;justify-content:center;padding:20px;overflow-x:hidden}
+.wrap{width:100%;max-width:640px;position:relative}
+.screen{display:none;animation:fade .4s ease}
+.screen.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.brand{text-align:center;margin-bottom:26px}
+.brand h1{font-size:34px;letter-spacing:2px;font-weight:800;
+  background:linear-gradient(180deg,#fff,var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.brand p{color:var(--dim);font-size:13px;margin-top:8px;letter-spacing:1px}
+.emoji{font-size:44px;display:block;margin-bottom:6px;filter:drop-shadow(0 0 18px var(--accent2))}
+.menu{display:grid;gap:14px;margin-top:8px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;
+  cursor:pointer;transition:.22s;text-align:left;color:var(--ink)}
+.tile:hover{border-color:var(--accent);transform:translateY(-2px);background:#191428}
+.tile .t{font-size:17px;font-weight:700;display:flex;align-items:center;gap:10px}
+.tile .d{font-size:13px;color:var(--dim);margin-top:7px;line-height:1.55}
+.badge{font-size:11px;padding:2px 8px;border-radius:99px;border:1px solid var(--line);color:var(--dim)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px}
+label{display:block;font-size:13px;color:var(--dim);margin-bottom:9px;letter-spacing:.5px}
+textarea{width:100%;min-height:110px;background:#0d0b16;border:1px solid var(--line);border-radius:12px;
+  color:var(--ink);padding:14px;font-size:15px;font-family:inherit;resize:vertical;line-height:1.6}
+textarea:focus{outline:none;border-color:var(--accent)}
+.presets{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.preset{font-size:12px;padding:7px 12px;border-radius:99px;background:#1b1530;border:1px solid var(--line);
+  color:var(--dim);cursor:pointer;transition:.2s}
+.preset:hover{color:var(--ink);border-color:var(--accent)}
+.btn{width:100%;padding:15px;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;
+  background:linear-gradient(180deg,var(--accent2),var(--accent));color:#fff;transition:.2s;letter-spacing:1px}
+.btn:hover{filter:brightness(1.12)}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--dim);font-weight:600;font-size:14px}
+.btn.ghost:hover{color:var(--ink);border-color:var(--accent)}
+.btnrow{display:grid;gap:10px;margin-top:16px}
+.linkbox{display:flex;gap:8px;margin-top:16px;background:#0d0b16;border:1px solid var(--line);
+  border-radius:12px;padding:12px;align-items:center}
+.linkbox input{flex:1;background:none;border:none;color:var(--accent);font-size:12px;font-family:monospace}
+.linkbox input:focus{outline:none}
+.copy{padding:8px 14px;border-radius:9px;background:#1b1530;border:1px solid var(--line);color:var(--ink);
+  cursor:pointer;font-size:12px;white-space:nowrap}
+.copy:hover{border-color:var(--accent)}
+.hint{font-size:12px;color:var(--dim);margin-top:12px;line-height:1.6}
+.viewer{position:relative;min-height:340px;display:flex;align-items:center;justify-content:center}
+.msg{position:relative;background:#f7f2ea;color:#1a1a1a;border-radius:14px;padding:26px 24px;width:100%;
+  font-size:17px;line-height:1.75;word-break:break-word;box-shadow:0 18px 50px rgba(0,0,0,.6);
+  font-family:"Courier New",monospace;transform-origin:center bottom;transition:transform .5s}
+.msg .meta{font-size:11px;color:#8a8178;letter-spacing:2px;margin-bottom:12px;text-transform:uppercase}
+.msg .body{white-space:pre-wrap}
+.msg .timer{margin-top:16px;font-size:11px;color:#b8442a;letter-spacing:1px}
+#fire{position:absolute;inset:0;pointer-events:none;width:100%;height:100%}
+.center{text-align:center}
+.big{font-size:52px;margin-bottom:14px;filter:drop-shadow(0 0 24px var(--accent2))}
+.revealtitle{font-size:24px;font-weight:800;letter-spacing:1px}
+.revealsub{color:var(--dim);font-size:14px;margin-top:12px;line-height:1.7}
+.tip{background:#120f1d;border:1px solid var(--line);border-left:3px solid var(--accent);
+  border-radius:10px;padding:15px 17px;margin-top:12px}
+.tip .h{font-size:14px;font-weight:700;margin-bottom:6px}
+.tip .p{font-size:13px;color:var(--dim);line-height:1.7}
+.q{background:#120f1d;border:1px solid var(--line);border-radius:14px;padding:18px;margin-top:14px}
+.q .qt{font-size:15px;font-weight:700;margin-bottom:14px;line-height:1.55}
+.opt{display:block;width:100%;text-align:left;padding:12px 15px;border-radius:10px;background:#181228;
+  border:1px solid var(--line);color:var(--ink);font-size:14px;cursor:pointer;margin-top:8px;transition:.18s;font-family:inherit}
+.opt:hover{border-color:var(--accent)}
+.opt.right{border-color:#2f9e5f;background:#12261a}
+.opt.wrong{border-color:#c0392b;background:#261211}
+.why{font-size:13px;color:var(--dim);line-height:1.7;margin-top:12px;display:none;
+  border-top:1px dashed var(--line);padding-top:12px}
+.why.on{display:block}
+.foot{text-align:center;color:#544c66;font-size:11px;margin-top:26px;letter-spacing:.5px;line-height:1.7}
+.foot a{color:#615878;text-decoration:none;border-bottom:1px dotted #332c48}
+.back{position:absolute;top:-6px;left:0;background:none;border:none;color:var(--dim);
+  cursor:pointer;font-size:13px;padding:6px 0;font-family:inherit}
+.back:hover{color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section class="screen on" id="s-home">
+    <div class="brand">
+      <span class="emoji">🕳️</span>
+      <h1>树洞</h1>
+      <p>说完就烧 · 匿名倾诉 · 30 秒后消失</p>
+    </div>
+    <div class="menu" id="homeMenu"></div>
+    <div class="foot">匿名倾诉玩具 · 消息只存在链接里，不存服务器。</div>
+  </section>
+
+  <section class="screen" id="s-make">
+    <button class="back" onclick="go('s-home')">← 返回</button>
+    <div class="brand" style="margin-top:34px">
+      <h1 style="font-size:24px">🕳️ 攻 · 丢个树洞</h1>
+      <p>匿名的心里话，说完就烧成灰</p>
+    </div>
+    <div class="card">
+      <label>想说的话（不会署名）</label>
+      <textarea id="msgInput" placeholder="深夜emo、工作吐槽、不敢说的话……&#10;发出去 30 秒后自动烧掉，不留档。"></textarea>
+      <div class="presets" id="presetRow"></div>
+      <button class="btn" onclick="makeLink()" id="makeBtn">🕳️ 生成一个会烧掉的树洞</button>
+      <div class="linkbox" id="linkbox" style="display:none">
+        <input id="linkOut" readonly>
+        <button class="copy" onclick="copyLink(event)">复制</button>
+      </div>
+      <div class="btnrow" id="afterLink" style="display:none">
+        <button class="btn ghost" onclick="preview()">👀 预览对方看到的样子</button>
+      </div>
+      <div class="hint" id="makeHint"></div>
+    </div>
+    <div class="foot">匿名 + 阅后即焚 —— 不给任何人截图留把柄的机会。<br>（当然，这是个玩具，别当真）</div>
+  </section>
+
+  <section class="screen" id="s-view">
+    <div class="brand" style="margin-bottom:18px">
+      <span class="emoji" style="font-size:30px">🌙</span>
+      <p style="margin:0">有人往你的树洞里丢了一句话</p>
+    </div>
+    <div class="card">
+      <div class="viewer">
+        <div class="msg" id="msgCard">
+          <div class="meta">READ IT · THEN IT'S GONE</div>
+          <div class="body" id="msgBody"></div>
+          <div class="timer" id="msgTimer"></div>
+        </div>
+        <canvas id="fire"></canvas>
+      </div>
+    </div>
+    <div class="foot" id="viewFoot"></div>
+  </section>
+
+  <section class="screen" id="s-burned">
+    <div class="card center">
+      <div class="big">🌙</div>
+      <div class="revealtitle">已焚毁</div>
+      <div class="revealsub">这句话看完就烧了，没人知道是谁说的。<br>……好吧，其实这是个树洞玩具 😶‍🌫️</div>
+      <div class="btnrow" id="burnBtns"></div>
+    </div>
+    <div class="foot">有些话，说出来就好 —— 但别忘了分辨：<br><a href="https://lu7897859-tech.github.io/" target="_blank" rel="noopener">真正的隐私，长什么样 →</a></div>
+  </section>
+
+  <section class="screen" id="s-def">
+    <button class="back" onclick="go('s-home')">← 返回</button>
+    <div class="brand" style="margin-top:34px">
+      <h1 style="font-size:24px">🛡️ 防 · 别被树洞骗了</h1>
+      <p>匿名倾诉很好，但有人靠它下手</p>
+    </div>
+    <div class="quizs" id="quizs"></div>
+    <div class="card" style="margin-top:18px">
+      <div class="tip" id="defTip"></div>
+      <div class="btnrow">
+        <button class="btn" onclick="go('s-make')">🕳️ 那我也来丢一个</button>
+        <button class="btn ghost" onclick="go('s-home')">回到首页</button>
+      </div>
+    </div>
+    <div class="foot">倾诉值得被温柔对待，也值得被认真保护。</div>
+  </section>
+
+</div>
+<script>
+/* ===== 配置（由 prank_factory 注入）===== */
+window.PRANK = {"presets":{"emo":"今天好累啊，但跟谁说都像矫情。就想找个地方说一句：我真的尽力了。","work":"老板今天又画饼了。我忍住了没笑场，但我真的快撑不住了。","secret":"有件事我只敢匿名说：我其实……很想念三年前的自己。","crush":"偷偷说一句：每次你发消息，我都会先放下手里所有事。"},"presetLabels":{"emo":"🌙 深夜emo","work":"💼 职场吐槽","secret":"🤫 匿名秘密","crush":"💗 不敢说的话"},"tiles":[{"title":"🕳️ 攻 · 丢个树洞","badge":"匿名说","desc":"匿名写一句心里话，生成链接发出去。对方打开 → 看 30 秒 → 一把火烧成灰，不留把柄。","screen":"s-make"},{"title":"🛡️ 防 · 别被树洞骗","badge":"保命守则","desc":"匿名倾诉很治愈，但骗子最爱深夜的情绪。3 道题学会保护自己。","screen":"s-def"}],"burnButtons":[{"label":"🛡️ 看看怎么保护自己","screen":"s-def","primary":true},{"label":"也丢一个树洞 →","screen":"s-make"}],"quiz":[{"q":"半夜刷到一个\"树洞小助手\"，说匿名倾诉前要先登录微信验证身份。怎么做？","opts":["登录一下没关系，反正是匿名的","立刻退出 —— 真匿名的东西不会要你的账号","先登录，用完再退"],"a":1,"why":"要你登录的\"匿名\"都是假匿名。它要的不是名字，是你的账号和通讯录。"},{"q":"一个链接说\"点开看看别人对你的匿名评价\"，你最好的反应？","opts":["好奇，点开看看","先看域名是不是正规平台，陌生链接直接删","转发给朋友一起看"],"a":1,"why":"\"别人怎么评价你\"是经典钓鱼诱饵 —— 它钓的是你的好奇心。第一步永远是看域名。"},{"q":"深夜情绪低落，一个陌生的\"树洞\"要你填手机号才能发消息。这意味着什么？","opts":["正常操作，填一下就好","你的手机号就是它的商品，别填","填一半试试"],"a":1,"why":"真正的树洞不收你的隐私。要手机号/身份证的，你做的是填表，不是倾诉。"}],"destroySeconds":30,"burnMs":3000,"flameHueMin":255,"flameHueMax":290,"timerText":"🕳️ {n} 秒后树洞封存…","viewFoot":"这句话在 30 秒后自动消失","burnedFoot":"🕳️ 树洞已封","makeEmptyHint":"先写点什么吧 🌙","makeOkHint":"✅ 树洞已生成。发给那个人，他看完就烧了。","defense":{"title":"🛡️ 防 · 别被树洞骗了","tagline":"匿名倾诉很好，但有人靠它下手","tipTitle":"💡 三条保命守则","tipBody":"1. <b>匿名≠安全</b>：真匿名工具不会要你登录、不会读你通讯录、不碰相册。<br>2. <b>看链接再点</b>：深夜情绪上头时最容易点陌生链接 —— 先停三秒看域名。<br>3. <b>别掏心掏肺给陌生人</b>：真正的倾诉对象是朋友，不是刚加上的\"树洞小助手\"。","cta1":"🕳️ 那我也来丢一个","cta2":"回到首页","foot":"倾诉值得被温柔对待，也值得被认真保护。"}};
+/* ===== 引擎（产线公共逻辑，勿在玩具里改）===== */
+var CFG = window.PRANK;
+var ctx = { msg: '' };
+function $(id){ return document.getElementById(id); }
+function go(id){
+  document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('on'); });
+  $(id).classList.add('on');
+  window.scrollTo({top:0,behavior:'instant'});
+  if(id==='s-def') renderQuiz();
+}
+function b64enc(s){ try{ return btoa(unescape(encodeURIComponent(s))); }catch(e){ return ''; } }
+function b64dec(s){ try{ return decodeURIComponent(escape(atob(s))); }catch(e){ return ''; } }
+function fillPreset(k){ $('msgInput').value = (CFG.presets||{})[k] || ''; }
+
+/* 主页 tiles */
+(function buildHome(){
+  var box = $('homeMenu');
+  (CFG.tiles||[]).forEach(function(t){
+    var b = document.createElement('button'); b.className='tile';
+    b.innerHTML = '<div class="t">'+t.title+' <span class="badge">'+t.badge+'</span></div><div class="d">'+t.desc+'</div>';
+    b.onclick = function(){ go(t.screen); };
+    box.appendChild(b);
+  });
+})();
+/* 预设 chips */
+(function buildPresets(){
+  var box = $('presetRow');
+  Object.keys(CFG.presets||{}).forEach(function(k){
+    var sp = document.createElement('span'); sp.className='preset';
+    sp.textContent = CFG.presetLabels && CFG.presetLabels[k] ? CFG.presetLabels[k] : k;
+    sp.onclick = function(){ fillPreset(k); };
+    box.appendChild(sp);
+  });
+})();
+/* 焚毁后按钮 */
+(function buildBurnBtns(){
+  var box = $('burnBtns');
+  (CFG.burnButtons||[]).forEach(function(b){
+    var el = document.createElement('button');
+    el.className = b.primary ? 'btn' : 'btn ghost'; el.textContent = b.label;
+    el.onclick = function(){ if(b.screen) go(b.screen); else if(b.href) location.href=b.href; };
+    box.appendChild(el);
+  });
+})();
+/* 防线提示 */
+(function buildDefTip(){
+  var t = CFG.defense || {};
+  $('defTip').innerHTML = '<div class="h">'+(t.tipTitle||'')+'</div><div class="p">'+(t.tipBody||'')+'</div>';
+})();
+
+/* 生成链接 */
+function makeLink(){
+  var t = $('msgInput').value.trim();
+  if(!t){ $('makeHint').textContent = CFG.makeEmptyHint || '先写点什么吧 🙂'; return; }
+  ctx.msg = t;
+  var url = location.origin + location.pathname + '#m=' + encodeURIComponent(b64enc(t));
+  $('linkOut').value = url;
+  $('linkbox').style.display = 'flex';
+  $('afterLink').style.display = 'grid';
+  $('makeHint').innerHTML = CFG.makeOkHint || '✅ 链接已生成。';
+  try{ history.replaceState(null,'','#m='+encodeURIComponent(b64enc(t))); }catch(e){}
+}
+function copyLink(ev){
+  var i = $('linkOut'); i.select(); i.setSelectionRange(0,9999);
+  try{ document.execCommand('copy'); }catch(e){}
+  var el = (ev && ev.target) || $('linkOut').nextElementSibling;
+  var old = el.textContent; el.textContent='已复制 ✓';
+  setTimeout(function(){ el.textContent=old; },1500);
+}
+function preview(){ startView(ctx.msg); }
+
+/* 接收方视角 + 焚毁动画 */
+var burning = false;
+function startView(text){
+  go('s-view');
+  $('msgBody').textContent = text || '（空消息）';
+  var card = $('msgCard');
+  card.style.opacity='1'; card.style.transform='none';
+  card.style.maskImage='linear-gradient(#000 100%,#000 100%)';
+  card.style.webkitMaskImage='linear-gradient(#000 100%,#000 100%)';
+  $('viewFoot').textContent = CFG.viewFoot || '';
+  burning = false;
+  var total = CFG.destroySeconds || 3;
+  var t = 0;
+  function tick(){
+    $('msgTimer').textContent = (CFG.timerText||'🔥 {n} 秒后自动焚毁…').replace('{n}', (total-t));
+    if(t >= total){ burn(); return; }
+    t++; setTimeout(tick, 1000);
+  }
+  tick();
+}
+function burn(){
+  if(burning) return; burning = true;
+  var card = $('msgCard'), cv = $('fire');
+  var parent = card.parentElement.getBoundingClientRect();
+  cv.width = parent.width; cv.height = parent.height;
+  var c = cv.getContext('2d');
+  var cx = card.offsetLeft, cy = card.offsetTop, cw = card.offsetWidth, ch = card.offsetHeight;
+  var parts = [], start = performance.now(), DUR = CFG.burnMs || 2600;
+  function rnd(a,b){ return a + Math.random()*(b-a); }
+  function frame(now){
+    var p = Math.min((now-start)/DUR,1);
+    c.clearRect(0,0,cv.width,cv.height);
+    var front = ch*(1-p), vis = Math.max(0,front), pct = (vis/ch*100);
+    card.style.maskImage = 'linear-gradient(#000 '+pct+'%, transparent '+pct+'%)';
+    card.style.webkitMaskImage = 'linear-gradient(#000 '+pct+'%, transparent '+pct+'%)';
+    card.style.transform = 'translateY('+(p*3)+'px)';
+    var n = p<1 ? 16 : 0;
+    for(var i=0;i<n;i++){
+      parts.push({x:cx+rnd(0,cw),y:cy+front+rnd(-10,26),vx:rnd(-.6,.6),vy:rnd(-4.2,-1.1),life:rnd(.6,1),r:rnd(1.4,4.6),hue:rnd(CFG.flameHueMin||18,CFG.flameHueMax||46)});
+    }
+    if(p>=1 && parts.length<90){ for(var k=0;k<3;k++){ parts.push({ash:true,x:cx+rnd(0,cw),y:cy+rnd(0,ch*.5),vx:rnd(-.5,.5),vy:rnd(.4,1.6),life:rnd(.8,1),r:rnd(1,3.4)}); } }
+    for(var j=parts.length-1;j>=0;j--){
+      var q=parts[j]; q.x+=q.vx; q.y+=q.vy; q.life-=q.ash?0.008:0.022;
+      if(q.ash){ q.vy+=0.012; } else { q.vy-=0.012; q.vx*=0.985; }
+      if(q.life<=0){ parts.splice(j,1); continue; }
+      var a=Math.max(0,q.life);
+      if(q.ash){ c.globalAlpha=a*0.5; c.fillStyle='#6d6259'; }
+      else { c.globalAlpha=a; c.fillStyle='hsl('+q.hue+',100%,'+(58+20*q.life)+'%)'; }
+      c.beginPath(); c.arc(q.x,q.y,q.r,0,7); c.fill();
+    }
+    c.globalAlpha=1;
+    if(p<1 || parts.length>0){ requestAnimationFrame(frame); }
+    else { card.style.opacity='0'; $('viewFoot').textContent = CFG.burnedFoot || ''; setTimeout(function(){ go('s-burned'); },500); }
+  }
+  requestAnimationFrame(frame);
+}
+
+/* 防守小测验 */
+var quizDone = {};
+function renderQuiz(){
+  var box = $('quizs'); box.innerHTML='';
+  (CFG.quiz||[]).forEach(function(item, qi){
+    var d = document.createElement('div'); d.className='q';
+    d.innerHTML = '<div class="qt">'+(qi+1)+'. '+item.q+'</div>';
+    item.opts.forEach(function(o, oi){
+      var b = document.createElement('button'); b.className='opt'; b.textContent=o;
+      b.onclick = function(){
+        if(quizDone[qi]) return; quizDone[qi]=true;
+        d.querySelectorAll('.opt').forEach(function(kk,ii){ if(ii===item.a) kk.classList.add('right'); else if(ii===oi) kk.classList.add('wrong'); });
+        var w=document.createElement('div'); w.className='why on';
+        w.innerHTML = (oi===item.a?'✅ 对了！':'❌ 再想想 —— ')+item.why;
+        d.appendChild(w);
+      };
+      d.appendChild(b);
+    });
+    box.appendChild(d);
+  });
+}
+
+/* 带 #m= 打开即进接收方视角 */
+(function init(){
+  var m = (location.hash||'').match(/m=([^&]+)/);
+  if(m){ var txt = b64dec(decodeURIComponent(m[1])); if(txt){ ctx.msg=txt; setTimeout(function(){ startView(txt); },350); } }
+})();
+</script>
+</body>
+</html>
