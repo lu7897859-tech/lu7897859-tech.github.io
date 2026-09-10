@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一把火 · 阅后即焚 | Burn It</title>
+<meta name="description" content="发一条会烧掉的消息。阅后即焚，动画一把火。恶作剧玩具，纯娱乐。">
+<style>
+:root{
+  --bg:#0b0a09; --card:#161311; --line:#2a2420; --ink:#f3ede6;
+  --dim:#9a8f86; --flame1:#ffd166; --flame2:#ff7a18; --flame3:#e8390e;
+  --accent:#ff8a3d;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background:radial-gradient(circle at 50% 0%,#1a1512 0%,#0b0a09 60%);
+  color:var(--ink);font-family:-apple-system,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  min-height:100%;display:flex;align-items:center;justify-content:center;padding:20px;
+  overflow-x:hidden;
+}
+.wrap{width:100%;max-width:640px;position:relative}
+.screen{display:none;animation:fade .4s ease}
+.screen.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+.brand{text-align:center;margin-bottom:26px}
+.brand h1{font-size:34px;letter-spacing:2px;font-weight:800;
+  background:linear-gradient(180deg,#fff,var(--flame2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.brand p{color:var(--dim);font-size:13px;margin-top:8px;letter-spacing:1px}
+.emoji{font-size:44px;display:block;margin-bottom:6px;filter:drop-shadow(0 0 18px rgba(255,122,24,.55))}
+
+.menu{display:grid;gap:14px;margin-top:8px}
+.tile{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;
+  cursor:pointer;transition:.22s;text-align:left;color:var(--ink)
+}
+.tile:hover{border-color:var(--accent);transform:translateY(-2px);background:#1c1815}
+.tile .t{font-size:17px;font-weight:700;display:flex;align-items:center;gap:10px}
+.tile .d{font-size:13px;color:var(--dim);margin-top:7px;line-height:1.55}
+.badge{font-size:11px;padding:2px 8px;border-radius:99px;border:1px solid var(--line);color:var(--dim)}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px}
+label{display:block;font-size:13px;color:var(--dim);margin-bottom:9px;letter-spacing:.5px}
+textarea{
+  width:100%;min-height:110px;background:#0f0d0c;border:1px solid var(--line);border-radius:12px;
+  color:var(--ink);padding:14px;font-size:15px;font-family:inherit;resize:vertical;line-height:1.6
+}
+textarea:focus{outline:none;border-color:var(--accent)}
+.presets{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.preset{font-size:12px;padding:7px 12px;border-radius:99px;background:#1d1815;border:1px solid var(--line);
+  color:var(--dim);cursor:pointer;transition:.2s}
+.preset:hover{color:var(--ink);border-color:var(--accent)}
+.btn{
+  width:100%;padding:15px;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;
+  background:linear-gradient(180deg,var(--flame2),var(--flame3));color:#fff;transition:.2s;letter-spacing:1px
+}
+.btn:hover{filter:brightness(1.12)}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--dim);font-weight:600;font-size:14px}
+.btn.ghost:hover{color:var(--ink);border-color:var(--accent)}
+.btnrow{display:grid;gap:10px;margin-top:16px}
+.linkbox{
+  display:flex;gap:8px;margin-top:16px;background:#0f0d0c;border:1px solid var(--line);
+  border-radius:12px;padding:12px;align-items:center
+}
+.linkbox input{flex:1;background:none;border:none;color:var(--accent);font-size:12px;font-family:monospace}
+.linkbox input:focus{outline:none}
+.copy{padding:8px 14px;border-radius:9px;background:#241d18;border:1px solid var(--line);color:var(--ink);
+  cursor:pointer;font-size:12px;white-space:nowrap}
+.copy:hover{border-color:var(--accent)}
+.hint{font-size:12px;color:var(--dim);margin-top:12px;line-height:1.6}
+
+/* 接收方视角 */
+.viewer{position:relative;min-height:340px;display:flex;align-items:center;justify-content:center}
+.msg{
+  position:relative;background:#f7f2ea;color:#1a1a1a;border-radius:14px;padding:26px 24px;
+  width:100%;font-size:17px;line-height:1.75;word-break:break-word;
+  box-shadow:0 18px 50px rgba(0,0,0,.6);font-family:"Courier New",monospace;
+  -webkit-mask-image:linear-gradient(#000 100%,#000 100%);mask-image:linear-gradient(#000 100%,#000 100%);
+  mask-size:100% 100%;-webkit-mask-size:100% 100%;mask-repeat:no-repeat;-webkit-mask-repeat:no-repeat;
+  transform-origin:center bottom;transition:transform .5s
+}
+.msg .meta{font-size:11px;color:#8a8178;letter-spacing:2px;margin-bottom:12px;text-transform:uppercase}
+.msg .body{white-space:pre-wrap}
+.msg .timer{margin-top:16px;font-size:11px;color:#b8442a;letter-spacing:1px}
+#fire{position:absolute;inset:0;pointer-events:none;width:100%;height:100%}
+.center{text-align:center}
+.big{font-size:52px;margin-bottom:14px;filter:drop-shadow(0 0 24px rgba(255,122,24,.7))}
+.revealtitle{font-size:24px;font-weight:800;letter-spacing:1px}
+.revealsub{color:var(--dim);font-size:14px;margin-top:12px;line-height:1.7}
+
+/* 防守攻略 */
+.tip{background:#141110;border:1px solid var(--line);border-left:3px solid var(--accent);
+  border-radius:10px;padding:15px 17px;margin-top:12px}
+.tip .h{font-size:14px;font-weight:700;margin-bottom:6px}
+.tip .p{font-size:13px;color:var(--dim);line-height:1.7}
+.quizs{margin-top:6px}
+.q{background:#141110;border:1px solid var(--line);border-radius:14px;padding:18px;margin-top:14px}
+.q .qt{font-size:15px;font-weight:700;margin-bottom:14px;line-height:1.55}
+.opt{display:block;width:100%;text-align:left;padding:12px 15px;border-radius:10px;background:#1b1614;
+  border:1px solid var(--line);color:var(--ink);font-size:14px;cursor:pointer;margin-top:8px;transition:.18s;font-family:inherit}
+.opt:hover{border-color:var(--accent)}
+.opt.right{border-color:#2f9e5f;background:#12261a}
+.opt.wrong{border-color:#c0392b;background:#261211}
+.why{font-size:13px;color:var(--dim);line-height:1.7;margin-top:12px;display:none;
+  border-top:1px dashed var(--line);padding-top:12px}
+.why.on{display:block}
+.foot{text-align:center;color:#5c534c;font-size:11px;margin-top:26px;letter-spacing:.5px;line-height:1.7}
+.foot a{color:#6b6158;text-decoration:none;border-bottom:1px dotted #3a332e}
+.back{position:absolute;top:-6px;left:0;background:none;border:none;color:var(--dim);
+  cursor:pointer;font-size:13px;padding:6px 0;font-family:inherit}
+.back:hover{color:var(--ink)}
+.stat{font-size:12px;color:#5c534c;text-align:center;margin-top:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ===== 首页 ===== -->
+  <section class="screen on" id="s-home">
+    <div class="brand">
+      <span class="emoji">🔥</span>
+      <h1>一把火</h1>
+      <p>发一条会烧掉的消息 · 阅后即焚 · 动画一把火</p>
+    </div>
+    <div class="menu">
+      <button class="tile" onclick="go('s-make')">
+        <div class="t">😈 攻 · 我来整蛊 <span class="badge">发消息</span></div>
+        <div class="d">写一句话，生成链接发给朋友。他打开 → 内容看几秒 → 当着面一把火烧成灰。</div>
+      </button>
+      <button class="tile" onclick="go('s-def')">
+        <div class="t">🛡️ 防 · 我来识破 <span class="badge">小测验</span></div>
+        <div class="d">教你一眼看穿这类"阅后即焚"恶作剧。3 道题，看完你也是老江湖。</div>
+      </button>
+    </div>
+    <div class="foot">
+      纯娱乐玩具 · 消息只存在链接里，不存服务器，烧完即无。<br>
+      玩得开心，别用来吓唬真会被吓到的人 🙂
+    </div>
+  </section>
+
+  <!-- ===== 攻：制作 ===== -->
+  <section class="screen" id="s-make">
+    <button class="back" onclick="go('s-home')">← 返回</button>
+    <div class="brand" style="margin-top:34px">
+      <h1 style="font-size:24px">😈 攻 · 我来整蛊</h1>
+      <p>写给朋友看，然后当着他面烧掉</p>
+    </div>
+    <div class="card">
+      <label>要烧掉的消息</label>
+      <textarea id="msgInput" placeholder="随便写点什么……&#10;比如：'下次见面我请你吃火锅' / '其实我暗恋你三年了' / '这份合同明天作废'"></textarea>
+      <div class="presets">
+        <span class="preset" onclick="fillPreset('prank')">🎭 整蛊款</span>
+        <span class="preset" onclick="fillPreset('secret')">🕵️ 机密款</span>
+        <span class="preset" onclick="fillPreset('ex')">💔 烧给前任</span>
+        <span class="preset" onclick="fillPreset('love')">💌 表白款</span>
+      </div>
+      <button class="btn" onclick="makeLink()">🔥 生成会烧掉的消息</button>
+      <div class="linkbox" id="linkbox" style="display:none">
+        <input id="linkOut" readonly>
+        <button class="copy" onclick="copyLink()">复制</button>
+      </div>
+      <div class="btnrow" id="afterLink" style="display:none">
+        <button class="btn ghost" onclick="preview()">👀 预览朋友看到的样子</button>
+      </div>
+      <div class="hint" id="makeHint"></div>
+    </div>
+    <div class="foot">消息用链接编码，不经过任何服务器 —— 真的阅后即焚。</div>
+  </section>
+
+  <!-- ===== 接收方视角 ===== -->
+  <section class="screen" id="s-view">
+    <div class="brand" style="margin-bottom:18px">
+      <span class="emoji" style="font-size:30px">📨</span>
+      <p style="margin:0">你收到一条阅后即焚的消息</p>
+    </div>
+    <div class="card">
+      <div class="viewer">
+        <div class="msg" id="msgCard">
+          <div class="meta">BURN AFTER READING</div>
+          <div class="body" id="msgBody"></div>
+          <div class="timer" id="msgTimer">🔥 即将自动焚毁…</div>
+        </div>
+        <canvas id="fire"></canvas>
+      </div>
+    </div>
+    <div class="foot" id="viewFoot">这条消息在你看完后会自动消失</div>
+  </section>
+
+  <!-- ===== 焚毁后 · reveal ===== -->
+  <section class="screen" id="s-burned">
+    <div class="card center">
+      <div class="big">🔥</div>
+      <div class="revealtitle">已焚毁</div>
+      <div class="revealsub">这条消息读完就烧了，谁也拿不回来。<br>……当然，这本来就是个恶作剧玩具 😏</div>
+      <div class="btnrow">
+        <button class="btn" onclick="go('s-def')">🛡️ 看看怎么识破它</button>
+        <button class="btn ghost" onclick="go('s-home')">自己做一个 →</button>
+      </div>
+    </div>
+    <div class="foot">灰烬里藏了一句给聪明人的话：<br><a href="https://lu7897859-tech.github.io/" target="_blank" rel="noopener">有些"消失"，是演给你看的 →</a></div>
+  </section>
+
+  <!-- ===== 防：识破攻略 ===== -->
+  <section class="screen" id="s-def">
+    <button class="back" onclick="go('s-home')">← 返回</button>
+    <div class="brand" style="margin-top:34px">
+      <h1 style="font-size:24px">🛡️ 防 · 我来识破</h1>
+      <p>3 道题，学会看穿这类恶作剧</p>
+    </div>
+    <div class="quizs" id="quizs"></div>
+    <div class="card" style="margin-top:18px" id="defCard" >
+      <div class="tip">
+        <div class="h">💡 记住这三条，够用一辈子</div>
+        <div class="p">
+          1. <b>看链接</b>：恶作剧玩具都在自己的域名上跑，不会是你熟悉的银行/聊天软件官方域名。<br>
+          2. <b>找破绽</b>：真·阅后即焚不会有"倒计时几秒"的表演；真·系统提示不会催你快点看。<br>
+          3. <b>别动手</b>：任何让你"立刻输入密码/验证码/转账"的，一律先停手 —— 那才是真危险，不是恶作剧。
+        </div>
+      </div>
+      <div class="btnrow">
+        <button class="btn" onclick="go('s-make')">😈 那我也来整蛊一个</button>
+        <button class="btn ghost" onclick="go('s-home')">回到首页</button>
+      </div>
+    </div>
+    <div class="foot">恶作剧的攻与防，都在"玩"这个框里。<br>真正该警惕的，是那些不跟你开玩笑的人。</div>
+  </section>
+
+</div>
+
+<script>
+/* ============ 屏幕切换 ============ */
+var ctx = { msg: '' };
+function go(id){
+  document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('on'); });
+  document.getElementById(id).classList.add('on');
+  window.scrollTo({top:0,behavior:'instant'});
+  if(id==='s-def') renderQuiz();
+}
+function $(id){ return document.getElementById(id); }
+
+/* ============ 预设文案 ============ */
+var PRESETS = {
+  prank: '恭喜你中了 500 万！……开玩笑的 😜 这条消息 3 秒后烧掉，快截图。',
+  secret: '【绝密】代号"午夜火种"已启动。读完本消息，记录将被焚毁。不要告诉任何人。',
+  ex: '其实我一直没删掉你的微信。今天终于决定——把这段关系，一把火烧了。',
+  love: '有件事憋了很久：我喜欢你。这句话只给你看一次，烧掉就当我说过了。'
+};
+function fillPreset(k){ $('msgInput').value = PRESETS[k] || ''; }
+
+/* ============ 生成链接 ============ */
+function b64enc(s){ try{ return btoa(unescape(encodeURIComponent(s))); }catch(e){ return ''; } }
+function b64dec(s){ try{ return decodeURIComponent(escape(atob(s))); }catch(e){ return ''; } }
+
+function makeLink(){
+  var t = $('msgInput').value.trim();
+  if(!t){ $('makeHint').textContent = '先写点什么吧 🙂'; return; }
+  ctx.msg = t;
+  var url = location.origin + location.pathname + '#m=' + encodeURIComponent(b64enc(t));
+  $('linkOut').value = url;
+  $('linkbox').style.display = 'flex';
+  $('afterLink').style.display = 'grid';
+  $('makeHint').innerHTML = '✅ 链接已生成。发给朋友，他打开就能看到一条会烧掉的消息。<br>对方读完 → 自动焚毁，你看不到他的反应也没关系（恶作剧嘛）。';
+  try{ history.replaceState(null,'','#m='+encodeURIComponent(b64enc(t))); }catch(e){}
+}
+function copyLink(){
+  var i = $('linkOut'); i.select(); i.setSelectionRange(0,9999);
+  try{ document.execCommand('copy'); }catch(e){}
+  event.target.textContent = '已复制 ✓';
+  setTimeout(function(){ event.target.textContent='复制'; },1500);
+}
+function preview(){ startView(ctx.msg); }
+
+/* ============ 接收方视角 + 火焰动画 ============ */
+var burning = false;
+function startView(text){
+  go('s-view');
+  $('msgBody').textContent = text || '（空消息）';
+  $('msgCard').style.opacity = '1';
+  $('msgCard').style.transform = 'none';
+  $('msgCard').style.maskImage = 'linear-gradient(#000 100%,#000 100%)';
+  $('msgCard').style.webkitMaskImage = 'linear-gradient(#000 100%,#000 100%)';
+  $('msgTimer').textContent = '🔥 即将自动焚毁…';
+  $('viewFoot').textContent = '这条消息在你看完后会自动消失';
+  burning = false;
+  var t = 0;
+  var cd = setInterval(function(){
+    t++;
+    $('msgTimer').textContent = '🔥 ' + (3 - t) + ' 秒后自动焚毁…';
+    if(t >= 3){ clearInterval(cd); burn(); }
+  }, 1000);
+}
+function burn(){
+  if(burning) return; burning = true;
+  var card = $('msgCard');
+  var cv = $('fire');
+  var rect = card.getBoundingClientRect();
+  var parent = card.parentElement.getBoundingClientRect();
+  cv.width = parent.width; cv.height = parent.height;
+  cv.style.left = '0'; cv.style.top = '0';
+  var c = cv.getContext('2d');
+  var cx = card.offsetLeft, cy = card.offsetTop, cw = card.offsetWidth, ch = card.offsetHeight;
+  var parts = [];
+  var start = performance.now();
+  var DUR = 2600;
+  function rnd(a,b){ return a + Math.random()*(b-a); }
+  function frame(now){
+    var p = Math.min((now - start)/DUR, 1);
+    c.clearRect(0,0,cv.width,cv.height);
+    // 火焰前沿从下往上扫
+    var front = ch * (1 - p);           // 当前未烧部分底部 y
+    // 把卡片裁掉下面已烧的部分（从上往下保留 front 高度）
+    var vis = Math.max(0, front);
+    card.style.maskImage = 'linear-gradient(#000 ' + (vis/ch*100) + '%, transparent ' + (vis/ch*100) + '%)';
+    card.style.webkitMaskImage = 'linear-gradient(#000 ' + (vis/ch*100) + '%, transparent ' + (vis/ch*100) + '%)';
+    card.style.transform = 'translateY(' + (p*3) + 'px)';
+    // 生成火花
+    var n = p<1 ? 16 : 0;
+    for(var i=0;i<n;i++){
+      parts.push({
+        x: cx + rnd(0,cw), y: cy + front + rnd(-10,26),
+        vx: rnd(-.6,.6), vy: rnd(-4.2,-1.1),
+        life: rnd(.6,1), r: rnd(1.4,4.6), hue: rnd(18,46)
+      });
+    }
+    // 灰烬下落
+    if(p>=1 && parts.length < 90){
+      for(var k=0;k<3;k++){
+        parts.push({ ash:true, x: cx+rnd(0,cw), y: cy+rnd(0,ch*0.5), vx: rnd(-.5,.5), vy: rnd(.4,1.6), life: rnd(.8,1), r: rnd(1,3.4) });
+      }
+    }
+    for(var j=parts.length-1;j>=0;j--){
+      var q = parts[j];
+      q.x += q.vx; q.y += q.vy; q.life -= q.ash?0.008:0.022;
+      if(q.ash){ q.vy += 0.012; }
+      else { q.vy -= 0.012; q.vx *= 0.985; }
+      if(q.life <= 0){ parts.splice(j,1); continue; }
+      var alpha = Math.max(0,q.life);
+      if(q.ash){
+        c.globalAlpha = alpha*0.5;
+        c.fillStyle = '#6d6259';
+        c.beginPath(); c.arc(q.x,q.y,q.r,0,7); c.fill();
+      } else {
+        c.globalAlpha = alpha;
+        c.fillStyle = 'hsl(' + q.hue + ',100%,' + (58 + 20*q.life) + '%)';
+        c.beginPath(); c.arc(q.x,q.y,q.r,0,7); c.fill();
+      }
+    }
+    c.globalAlpha = 1;
+    if(p < 1 || parts.length > 0){
+      requestAnimationFrame(frame);
+    } else {
+      card.style.opacity = '0';
+      $('viewFoot').textContent = '🔥 灰烬散尽';
+      setTimeout(function(){ go('s-burned'); }, 500);
+    }
+  }
+  requestAnimationFrame(frame);
+}
+
+/* ============ 防守小测验 ============ */
+var QUIZ = [
+  {
+    q: '朋友发来一个链接，打开是一个"银行系统升级"页面，让你等 5 分钟自动完成。你最好的反应是？',
+    opts: ['照着页面提示等着', '看一眼网址域名，不是银行官方的就是假的', '叫朋友过来一起看'],
+    a: 1,
+    why: '恶作剧玩具都跑在自己的域名上。第一步永远是看网址 —— 这一步能挡掉 99% 的忽悠。'
+  },
+  {
+    q: '一条消息说"阅后即焚，5 秒后自动销毁"，屏幕角上还有个倒计时。这说明什么？',
+    opts: ['很高级，应该是真的阅后即焚', '真·阅后即焚不会表演倒计时给你看，这是做出来的戏剧效果', '赶紧截图保存'],
+    a: 1,
+    why: '"戏剧性"是恶作剧的标配。真正的隐私工具是安静地保护你，不是演给你看。'
+  },
+  {
+    q: '"我们来做个实验！点击这里授权登录，我就能看到你数据。" 这类话术最可能是什么？',
+    opts: ['有趣的小实验，玩玩看', '这是捞你账号的经典话术，直接拒绝', '先点开看看再说'],
+    a: 1,
+    why: '核心红线：任何要你"立刻登录/输密码/给验证码"的，先停手。恶作剧只是逗你笑，不碰你的账号。'
+  }
+];
+var quizDone = {};
+function renderQuiz(){
+  var box = $('quizs'); box.innerHTML = '';
+  QUIZ.forEach(function(item, qi){
+    var d = document.createElement('div'); d.className = 'q';
+    var h = '<div class="qt">' + (qi+1) + '. ' + item.q + '</div>';
+    d.innerHTML = h;
+    item.opts.forEach(function(o, oi){
+      var b = document.createElement('button'); b.className = 'opt'; b.textContent = o;
+      b.onclick = function(){
+        if(quizDone[qi]) return;
+        quizDone[qi] = true;
+        var kids = d.querySelectorAll('.opt');
+        kids.forEach(function(kk,kk_i){
+          if(kk_i === item.a) kk.classList.add('right');
+          else if(kk_i === oi) kk.classList.add('wrong');
+        });
+        var w = document.createElement('div'); w.className = 'why on';
+        w.innerHTML = (oi === item.a ? '✅ 对了！' : '❌ 再想想 —— ') + item.why;
+        d.appendChild(w);
+      };
+      d.appendChild(b);
+    });
+    box.appendChild(d);
+  });
+}
+
+/* ============ 打开即焚：带 #m= 直接进接收方视角 ============ */
+(function init(){
+  var h = location.hash || '';
+  var m = h.match(/m=([^&]+)/);
+  if(m){
+    var txt = b64dec(decodeURIComponent(m[1]));
+    if(txt){ ctx.msg = txt; setTimeout(function(){ startView(txt); }, 350); }
+  }
+})();
+</script>
+</body>
+</html>
