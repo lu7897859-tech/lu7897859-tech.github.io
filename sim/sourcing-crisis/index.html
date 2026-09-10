@@ -156,7 +156,7 @@ function finish(timeout){
     row.innerHTML='<div class="n"><span>'+dims[k].label+'</span><b>'+pct[k]+'%</b></div><div class="gb"><i style="width:'+pct[k]+'%;background:'+col+'"></i></div>';
     g.appendChild(row);
   });
-  $('diagH').textContent=(window.SIM.diagLabel||'诊断')+'：'+(v.h||d.label);
+  $('diagH').textContent=(window.SIM.diagLabel||'诊断')+'：'+((v.h||d.label).replace('{pct}',pct[worst]));
   $('diagB').textContent=(v.body||'').replace('{pct}',pct[worst]);
   // 收网
   var cta=window.SIM.paywall, cb=$('ctaBox');
