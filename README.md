@@ -57,7 +57,6 @@ Curated open-data guides rebuilt from public datasets — each with full attribu
 - [forgejo-ecosystem-curated-list](https://github.com/lu7897859-tech/forgejo-ecosystem-curated-list) — self-hosted Forgejo ecosystem
 - [chatgpt-zh-resources-guide](https://github.com/lu7897859-tech/chatgpt-zh-resources-guide) — Chinese LLM resource funnel
 - [floss-android-guide](https://github.com/lu7897859-tech/floss-android-guide) — FLOSS Android app index
-- [launch-torch](https://github.com/lu7897859-tech/launch-torch) — no-platform distribution toolkit
 
 ---
 
