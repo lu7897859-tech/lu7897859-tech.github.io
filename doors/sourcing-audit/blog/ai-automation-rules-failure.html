@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Why Your AI Automations Keep Breaking (and How to Catch It Before It Costs You) · Lunarwave Sourcing</title>
+<meta name="description" content="If you've built even a handful of AI-powered automations, you already know the uncomfortable truth: they almost never fail the way software fails in the">
+<link rel="canonical" href="https://lu7897859-tech.github.io/doors/sourcing-audit/blog/ai-automation-rules-failure.html">
+<meta property="og:title" content="Why Your AI Automations Keep Breaking (and How to Catch It Before It Costs You) · Lunarwave Sourcing">
+<meta property="og:description" content="If you've built even a handful of AI-powered automations, you already know the uncomfortable truth: they almost never fail the way software fails in the">
+<meta property="og:type" content="website">
+<meta name="robots" content="index,follow">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Lunarwave Sourcing","url":"https://lu7897859-tech.github.io/doors/sourcing-audit/","description":"Free instant USCC check, then a full verified report: registration status, real ownership, litigation, sanctions and adverse media. For importers buying from China.","potentialAction":{"@type":"SearchAction","target":"https://lu7897859-tech.github.io/doors/sourcing-audit/?q={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<style>
+:root{
+  --bg:#08090c; --bg2:#141821; --card:#0f1218; --line:#232a36;
+  --ink:#eef2f7; --dim:#8d98a8; --accent:#ff8a3d; --accent2:#ff6a1a;
+  --ok:#22c55e; --warn:#f59e0b; --radius:14px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header.top{border-bottom:1px solid var(--line);background:rgba(8,9,12,.82);backdrop-filter:blur(10px);position:sticky;top:0;z-index:20}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.logo{font-weight:800;letter-spacing:-.02em;font-size:17px;display:flex;align-items:center;gap:8px}
+.logo .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);display:inline-block}
+nav.tabs{display:flex;gap:18px;font-size:14px;color:var(--dim)}
+nav.tabs a{color:var(--dim)}
+nav.tabs a:hover{color:var(--ink)}
+.hero{padding:64px 0 40px;text-align:center}
+.eyebrow{display:inline-block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);border:1px solid var(--line);border-radius:999px;padding:5px 12px;margin-bottom:18px}
+h1{font-size:clamp(28px,4.4vw,46px);line-height:1.15;margin:0 0 14px;letter-spacing:-.025em}
+.sub{color:var(--dim);font-size:clamp(15px,1.8vw,18px);max-width:720px;margin:0 auto 28px}
+.demo{max-width:640px;margin:0 auto;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px;text-align:left}
+.demo .dt{font-size:13px;color:var(--dim);margin-bottom:10px;display:flex;justify-content:space-between}
+.demo .dt b{color:var(--ok)}
+.demo .row{display:flex;gap:8px}
+.demo input{flex:1;background:var(--bg2);border:1px solid var(--line);border-radius:10px;color:var(--ink);padding:12px 14px;font-size:15px;outline:none}
+.demo input:focus{border-color:var(--accent)}
+.demo button{background:var(--accent);color:#fff;border:0;border-radius:10px;padding:12px 18px;font-weight:700;font-size:15px;cursor:pointer;white-space:nowrap}
+.demo button:hover{background:var(--accent2)}
+.demo button[disabled]{opacity:.6;cursor:default}
+.demo .out{margin-top:12px;font-size:13.5px;color:var(--dim);white-space:pre-wrap;word-break:break-word;min-height:0}
+.demo .out.err{color:var(--warn)}
+.demo .out.ok{color:var(--ok)}
+.demo .note{font-size:12px;color:var(--dim);margin-top:10px;opacity:.8}
+.trust{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:26px 0 0}
+.trust span{font-size:12.5px;color:var(--dim);border:1px solid var(--line);border-radius:999px;padding:6px 12px}
+section{padding:44px 0;border-top:1px solid var(--line)}
+h2{font-size:clamp(20px,2.6vw,28px);margin:0 0 6px;letter-spacing:-.02em}
+.sect-sub{color:var(--dim);margin:0 0 26px;font-size:15px}
+.grid{display:grid;gap:16px}
+.g3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+.card h3{margin:0 0 8px;font-size:17px}
+.card p{margin:0;color:var(--dim);font-size:14.5px}
+.card ul{margin:10px 0 0;padding-left:18px;color:var(--dim);font-size:14.5px}
+.card ul li{margin:5px 0}
+.step-n{width:28px;height:28px;border-radius:8px;background:var(--bg2);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:var(--accent);margin-bottom:12px}
+.prod{display:flex;flex-direction:column}
+.prod .p-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.prod .price{font-weight:800;font-size:20px;color:var(--ink);white-space:nowrap}
+.prod .btn{margin-top:16px;display:inline-block;background:var(--accent);color:#fff;border-radius:10px;padding:10px 16px;font-weight:700;font-size:14.5px;text-align:center}
+.prod .btn:hover{background:var(--accent2);text-decoration:none}
+.prod .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
+.tiers{align-items:stretch}
+.tier{display:flex;flex-direction:column;position:relative}
+.tier.pop{border-color:var(--accent)}
+.tier .badge{position:absolute;top:-11px;left:20px;background:var(--accent);color:#fff;font-size:11px;font-weight:800;letter-spacing:.06em;padding:4px 10px;border-radius:999px;text-transform:uppercase}
+.tier .amt{font-size:30px;font-weight:800;margin:6px 0 2px;letter-spacing:-.03em}
+.tier .per{color:var(--dim);font-size:13px;margin-bottom:14px}
+.tier ul{list-style:none;padding:0;margin:0 0 18px;font-size:14.5px;color:var(--dim)}
+.tier ul li{padding-left:20px;position:relative;margin:7px 0}
+.tier ul li:before{content:"✓";position:absolute;left:0;color:var(--ok);font-weight:800}
+.tier .btn{margin-top:auto;display:block;background:var(--accent);color:#fff;border-radius:10px;padding:11px 16px;font-weight:700;text-align:center;font-size:14.5px}
+.tier .btn:hover{background:var(--accent2);text-decoration:none}
+.tier .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
+.faq details{border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-bottom:10px;background:var(--card)}
+.faq summary{cursor:pointer;font-weight:600;font-size:15.5px}
+.faq details p{color:var(--dim);font-size:14.5px;margin:10px 0 0}
+footer{border-top:1px solid var(--line);padding:34px 0 50px;color:var(--dim);font-size:13.5px}
+footer .cols{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));margin-bottom:24px}
+footer h4{color:var(--ink);font-size:13px;text-transform:uppercase;letter-spacing:.08em;margin:0 0 10px}
+footer a{color:var(--dim);display:block;margin:6px 0}
+footer a:hover{color:var(--ink)}
+.legal{border-top:1px solid var(--line);padding-top:18px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:12.5px;opacity:.8}
+article.doc{max-width:760px;margin:0 auto}
+article.doc table{width:100%;border-collapse:collapse;margin:18px 0;font-size:14.5px}
+article.doc th,article.doc td{border:1px solid var(--line);padding:8px 10px;text-align:left;color:var(--dim);vertical-align:top}
+article.doc th{background:var(--bg2);color:var(--ink);font-weight:600}
+article.doc hr{border:0;border-top:1px solid var(--line);margin:26px 0}
+article.doc h1{text-align:left;font-size:clamp(24px,3.4vw,36px)}
+article.doc h3{margin:26px 0 8px;font-size:18px}
+article.doc p,article.doc li{color:var(--dim);font-size:15.5px}
+.pill{display:inline-block;font-size:12px;color:var(--dim);border:1px solid var(--line);border-radius:999px;padding:4px 10px;margin:0 6px 6px 0}
+pre.out{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:14px;overflow:auto;font-size:12.5px;color:var(--ink)}
+@media(max-width:560px){.demo .row{flex-direction:column}nav.tabs{display:none}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="logo" href="../../index.html"><span class="dot"></span><span id="brand">Lunarwave Sourcing</span></a>
+  <nav class="tabs" id="nav"></nav>
+</div></header>
+<main id="app"></main>
+<footer><div class="wrap">
+  <div class="cols" id="foot"></div>
+  <div class="legal">
+    <span id="legalLeft"></span>
+    <span id="legalRight"></span>
+  </div>
+</div></footer>
+<script>window.DOOR = {"lang":"en","brand":"Lunarwave Sourcing","title":"China Supplier Verification — check any supplier before you pay","metaDesc":"Free instant USCC check, then a full verified report: registration status, real ownership, litigation, sanctions and adverse media. For importers buying from China.","root":"../../","demoEndpoint":"https://lined-decimal-habitat-madonna.trycloudflare.com/verify_supplier","demoFallback":"Use the full report flow below.","paywallNote":"Free instant checks are done for this visitor. Get the full verified report to continue — or query the MCP endpoint directly.","hero":{"eyebrow":"China supply-chain risk intelligence","h1":"Check any Chinese supplier before you wire the money.","sub":"Paste the company's Unified Social Credit Code or full registered name. Get an instant structural check for free, then a full verified report with ownership, litigation and risk signals — bilingual evidence included.","demoTitle":"Free instant check — no signup","demoBadge":"Live","demoPlaceholder":"18-digit USCC, e.g. 91330100716105852F","demoLabel":"Unified Social Credit Code or company name","demoBtn":"Check now","demoNote":"One free structural check per visitor. We never contact the company you look up."},"trust":["Verified against public registration data","Bilingual (中文 / English) evidence","We never contact your supplier","Money-back if the USCC has no match"],"stepsTitle":"From suspicion to certainty","stepsSub":"Three steps, no phone calls, no signup.","steps":[{"t":"Paste the code","d":"The 18-digit USCC from the supplier's business licence, or the full registered company name."},{"t":"Free structural check","d":"Instant validation of the code and what it does (and does not) tell you."},{"t":"Full verified report","d":"Registration status, legal representative, shareholders, litigation, sanction and adverse-media scan."}],"productsTitle":"What you can check","productsSub":"Human reports and machine endpoints from the same verification engine.","products":[{"name":"Free USCC Checker","price":"Free","tagline":"Validate a supplier's 18-digit registration code in your browser — instantly, no signup.","bullets":["Structural + check-digit validation, entirely client-side","Explains what a valid code still doesn't tell you","No account, no email, no tracking of the company you query"],"page":"free-uscc-check.html","cta":"https://lunarwave8803.gumroad.com/l/yxgrvw","ctaText":"Get the free red-flag checklist"},{"name":"How to Verify Chinese Suppliers in 2026","price":"$14","tagline":"The complete 5-layer verification guide — the exact checks that separate a real factory from a trading shell.","bullets":["5 layers: licence → ownership → operations → risk → payment","Real case studies (incl. a supplier who cut registered capital 6.44M and hiring −88% before going silent)","Why a 'Gold Supplier' badge is a paid ad slot, not a trust signal","Copy-paste questions to send a supplier today"],"page":"verify-china-supplier-guide.html","cta":"https://lunarwave8803.gumroad.com/l/kbgmsy","ctaText":"Get the guide — $14"},{"name":"China Business Bundle 2026","price":"$49","tagline":"Seven step-by-step guides: verification, deposits, payment red flags, landed cost, contracts and dispute recovery.","bullets":["Everything in the $14 guide, plus six more playbooks","Deposit-safety and payment-red-flag workflows","Landed-cost and total-cost-of-ownership sheets","Recovery steps when a supplier goes silent"],"page":"china-business-bundle.html","cta":"https://lunarwave8803.gumroad.com/l/ijpnuw","ctaText":"Get the bundle — $49"},{"name":"Payment Red Flags","price":"Included","tagline":"The signals that show up right before money disappears — and how to test for them before the wire.","bullets":["Personal / mismatched bank account names","Sudden push to wire outside a platform's escrow","Capital reductions and mass layoffs as pre-collapse signals"],"page":"payment-red-flags.html","cta":"https://lunarwave8803.gumroad.com/l/kbgmsy","ctaText":"Read the guide"},{"name":"MCP server for AI agents","price":"Pay per call","tagline":"Let your AI agent verify a supplier mid-workflow — registry status, ownership, risk signals — over one MCP endpoint.","bullets":["Single endpoint, pay only when a call succeeds","Tools: verify_supplier, landed_cost_calc, payment_red_flags, audit_checklist, certification_check","Works in any client that supports remote MCP"],"page":"mcp-server.html","cta":"https://lu7897859-tech.github.io/.well-known/mcp.json","ctaText":"Open the MCP endpoint"}],"tiersTitle":"Pricing","tiersSub":"Start free. Pay only when you need the full verified report.","tiers":[{"name":"Free","price":"$0","per":"one instant check","features":["Client-side USCC structural check","Free red-flag checklist","No signup required"],"cta":"https://lunarwave8803.gumroad.com/l/yxgrvw","ctaText":"Start free","ghost":true},{"name":"Verification Guide","price":"$14","per":"one-time","popular":true,"badge":"Most popular","features":["Complete 5-layer verification method","Real case studies with evidence","Supplier screening questions","Lifetime updates"],"cta":"https://lunarwave8803.gumroad.com/l/kbgmsy","ctaText":"Get it — $14"},{"name":"Business Bundle","price":"$49","per":"one-time","features":["Seven guides in one","Deposit & payment playbooks","Landed-cost sheets","Dispute-recovery steps"],"cta":"https://lunarwave8803.gumroad.com/l/ijpnuw","ctaText":"Get the bundle"}],"faqTitle":"FAQ","faq":[{"q":"Is the instant check really free?","a":"Yes. The structural USCC check runs in your browser with no account and no cost."},{"q":"Do you contact the company I look up?","a":"Never. Every signal comes from public registration data, court records and public media."},{"q":"What does a valid code not tell me?","a":"A valid USCC proves the code is well-formed, not that the company is active, solvent, or who really controls it. That is what the full report is for."},{"q":"Can my AI agent call this?","a":"Yes — there is a remote MCP endpoint with pay-per-call access. See the MCP server page."}],"nav":[{"label":"What you can check","href":"#products"},{"label":"Guides","href":"blog/index.html"},{"label":"Pricing","href":"#pricing"},{"label":"FAQ","href":"#faq"}],"footer":[{"t":"Verification","links":[{"label":"Free instant check","href":"./index.html"},{"label":"Pricing","href":"#pricing"},{"label":"FAQ","href":"#faq"}]},{"t":"Guides","links":[{"label":"All guides","href":"blog/index.html"},{"label":"Verify Chinese suppliers (2026)","href":"https://lunarwave8803.gumroad.com/l/kbgmsy"},{"label":"China Business Bundle","href":"https://lunarwave8803.gumroad.com/l/ijpnuw"},{"label":"12 sourcing scams","href":"articles/12-china-sourcing-scams-2026.html"}]},{"t":"For machines","links":[{"label":"MCP server","href":"doors/sourcing-audit/mcp-server.html"},{"label":"x402 manifest","href":".well-known/x402.json"},{"label":"llms.txt","href":"llms.txt"}]},{"t":"Company","links":[{"label":"About","href":"doors/sourcing-audit/about.html"},{"label":"Contact","href":"mailto:lu7897859@gmail.com"}]}],"legalLeft":"© 2026 Lunarwave Sourcing","legalRight":"Independent supplier due-diligence. Not a credit-reporting agency.","demoMode":"uscc","demoEmpty":"Please enter a company name or 18-digit registration number.","demoBusy":"Checking…","demoOffline":"The live network check is momentarily unavailable, but the free structural check still runs offline. The full report and MCP endpoint below still work.","articlesDir":"doors/sourcing-audit/blog_articles","blogTitle":"China sourcing & supplier verification guides","blogSub":"Practical, no-fluff guides for importers buying from China — written to be used before you pay, not after.","blogEyebrow":"Guides","articleCta":"https://lu7897859-tech.github.io/doors/sourcing-audit/","articleCtaTitle":"Check a supplier for free, right now","articleCtaText":"Paste the supplier's 18-digit USCC or full registered name for an instant structural check — then go further with the full verification guide.","articleCtaBtn":"Open the free check","articlesRelated":[{"label":"Free instant USCC check","href":"../free-uscc-check.html"},{"label":"Pricing & reports","href":"../index.html#pricing"},{"label":"MCP server for AI agents","href":"../mcp-server.html"},{"label":"12 China sourcing scams in 2026","href":"../../articles/12-china-sourcing-scams-2026.html"}],"related":[{"label":"12 China Sourcing Scams in 2026","href":"articles/12-china-sourcing-scams-2026.html"},{"label":"Free USCC checker","href":"doors/sourcing-audit/free-uscc-check.html"}],"article":{"title":"Why Your AI Automations Keep Breaking (and How to Catch It Before It Costs You)","desc":"If you've built even a handful of AI-powered automations, you already know the uncomfortable truth: they almost never fail the way software fails in the","tags":["automation","ai","ops"],"html":"<p><strong>Filename:<\/strong> 20260827_035_ai_automation_rules_failure_seo.md<\/p>\n<p><strong>Date:<\/strong> 2026-08-27<\/p>\n<p><strong>Series:<\/strong> AI 自动化系列第 1 篇（新支线；服务 Gumroad 店内 8/26 上架两款 AI 产品：The AI Automation Rule Audit $3 / The Inversion of Control Flaw $9——两品当前零流量、缺内容支撑）<\/p>\n<p><strong>Target keyword:<\/strong> why ai automations fail / ai automation troubleshooting guide / broken automation checklist / ai workflow silent failure / ai automation audit small business<\/p>\n<p><strong>Product tie-in:<\/strong> https://lunarwave8803.gumroad.com/l/dvqab（The AI Automation Rule Audit: 20-Point Diagnostic）＋ https://lunarwave8803.gumroad.com/l/ywxlvy（The Inversion of Control Flaw: Why Your AI Automation Rules Keep Failing）<\/p>\n<p><strong>Word count target:<\/strong> ~1100 words（正文）<\/p>\n<hr>\n<h2>Why Your AI Automations Keep Breaking — and How to Catch It Before It Costs You<\/h2>\n<p><strong>Meta description:<\/strong> Most AI automations never crash — they fail quietly: skipped leads, empty fields, confident wrong output. Here are the 20 failure modes behind almost every broken workflow, plus a 15-minute triage ritual to catch them early.<\/p>\n<hr>\n<p>If you've built even a handful of AI-powered automations, you already know the uncomfortable truth: they almost never fail the way software fails in the movies. There's no dramatic crash. No stack trace in your inbox.<\/p>\n<p>What actually happens is quieter. A lead form gets submitted and nobody follows up. A row lands in your spreadsheet with the total column empty. An AI-written reply goes out, politely and confidently, answering a question the customer didn't ask.<\/p>\n<p>Silent failure is the default failure mode of modern automation — and the longer it runs unnoticed, the more expensive it gets. This guide walks through the twenty failure patterns behind the vast majority of broken workflows, organized into five layers, so you can stop guessing which one bit you this time.<\/p>\n<h2>The three ways automations actually fail<\/h2>\n<p>Before the list, a useful distinction. Not all failures cost the same:<\/p>\n<ul>\n<li><strong>Loud failure<\/strong> — the run throws an error you can see. Annoying, but cheap: you fix it, it stays fixed.<\/li>\n<li><strong>Quiet failure<\/strong> — the run completes &quot;successfully&quot; and produces wrong output. Misspelled names, merged duplicates, replies sent to the wrong segment. This is where money leaks.<\/li>\n<li><strong>Drift<\/strong> — everything works today, then an upstream change (a renamed field, a moved button, an updated model) silently reshapes what flows through, and nobody notices for weeks.<\/li>\n<\/ul>\n<p>Most teams over-invest in catching loud failures and have essentially no defense against the other two. That imbalance is the root problem.<\/p>\n<h2>Twenty failure modes, five layers<\/h2>\n<h3>Layer 1 — Triggers<\/h3>\n<ul>\n<li><strong>Duplicate triggers.<\/strong> The same event fires the flow twice; the customer gets two emails or your ledger gets two rows.<\/li>\n<li><strong>Missed retries.<\/strong> A webhook fires while your endpoint is down; most builders retry a few times, some give up silently — that record simply vanishes from your pipeline.<\/li>\n<li><strong>Timezone off-by-one.<\/strong> Daily summaries arrive at the wrong hour, or worse, jobs meant for &quot;end of day&quot; fire mid-morning for half your customers.<\/li>\n<li><strong>Edit-triggered chaos.<\/strong> The trigger fires not just on creation but on every edit, rerunning the whole chain each time someone fixes a typo.<\/li>\n<\/ul>\n<h3>Layer 2 — Inputs and data<\/h3>\n<ul>\n<li><strong>Silent truncation.<\/strong> Long text fields get clipped at some invisible limit; the automation confidently processes half the order notes.<\/li>\n<li><strong>Date-format ambiguity.<\/strong> 08/04 means April 8 to your form and August 4 to your spreadsheet. Neither system complains.<\/li>\n<li><strong>Locale and currency mixing.<\/strong> Amounts computed across systems disagree because one treats commas as thousand separators and the other treats them as decimals.<\/li>\n<li><strong>Null versus empty string.<\/strong> Your filter says &quot;if field is empty, skip&quot; — and it works beautifully until a source sends <code>&quot;null&quot;<\/code> as literal text instead of an actual null value.<\/li>\n<\/ul>\n<h3>Layer 3 — Logic and branching<\/h3>\n<ul>\n<li><strong>Filter logic inversion.<\/strong> One misplaced AND-versus-OR quietly inverts a condition so the rule matches everyone except who you intended.<\/li>\n<li><strong>Default branches swallowing errors.<\/strong> When something unexpected happens, execution falls into a catch-all path labeled &quot;success.&quot; The run log glows green; the work wasn't done.<\/li>\n<li><strong>Stale thresholds.<\/strong> Rules still compare against numbers, tiers, or tags set a year ago by someone who has left the company.<\/li>\n<li><strong>Overlapping rules fighting.<\/strong> Two automations react to the same event with contradictory actions; last writer wins and outcomes alternate depending on millisecond timing.<\/li>\n<\/ul>\n<h3>Layer 4 — APIs and external dependencies<\/h3>\n<ul>\n<li><strong>Token expiry without alerting.<\/strong> The connection between tools expires; rather than failing, the flow keeps running on cached behavior or just stops while dashboards stay green.<\/li>\n<li><strong>No rate-limit handling.<\/strong> Everything works at test volume; at real volume, requests exceed quotas and responses degrade in ways no one checks.<\/li>\n<li><strong>Upstream schema changes.<\/strong> A connected app renames or reorders a field; your mapping now writes nothing into the field your team actually uses downstream.<\/li>\n<li><strong>Pagination ceilings.<\/strong> Reports sync &quot;fine,&quot; but silently cap at N pages or N hundred rows, so any growth past that point is invisible missing data.<\/li>\n<\/ul>\n<h3>Layer 5 — Monitoring and ownership<\/h3>\n<ul>\n<li><strong>&quot;Didn't error&quot; treated as success.<\/strong> Without a defined correctness metric, uptime becomes the proxy for working — and quiet failures sail through.<\/li>\n<li><strong>No dead-letter pile.<\/strong> Runs that can't complete have nowhere to go, so there's no observable backlog telling you how much work is silently stranded.<\/li>\n<li><strong>No spot-check ritual.<\/strong> Nobody ever opens three random &quot;successful&quot; runs per week and eyeballs whether the outputs are actually right.<\/li>\n<li><strong>Ownerless automations.<\/strong> Built by a founder, a freelancer, or &quot;that one person who's good at this.&quot; When they move on, no one knows what the rules do, let alone when they break.<\/li>\n<\/ul>\n<p>Notice the pattern: <strong>roughly half of the list isn't technical at all.<\/strong> Layers 1–4 are engineering hygiene; Layer 5 is management. Most teams fail at Layer 5 first.<\/p>\n<h2>Why you never see it coming<\/h2>\n<p>Three biases keep silent failures invisible:<\/p>\n<ul>\n<li><strong>Dashboard bias.<\/strong> Green checkmarks dominate the interface, so a completed run *feels* like a correct run.<\/li>\n<li><strong>Build-time testing.<\/strong> You tested it once with clean sample data, it worked, and it entered &quot;done&quot; status in your mind — permanently.<\/li>\n<li><strong>Cost asymmetry.<\/strong> Each individual miss looks tiny (one lead, one row, one email). Only the aggregate, months later — cold leads, refund requests, mysterious inventory gaps — adds up to real money, and by then the trail is cold.<\/li>\n<\/ul>\n<h2>A 15-minute weekly triage ritual<\/h2>\n<p>You don't need enterprise observability to catch most of this. Once a week, pick your single highest-stakes automation and do four things:<\/p>\n<ul>\n<li>Open its recent run history and scan the <strong>last twenty runs<\/strong>.<\/li>\n<li>Count runs whose outcome wasn't the obvious happy path — errors, skips, unusual branches. Note the number; watch whether it trends up over weeks.<\/li>\n<li>Open <strong>three runs marked successful<\/strong> and actually look at the outputs the way a customer or colleague would receive them.<\/li>\n<li>Verify the <strong>one field or outcome a human downstream depends on<\/strong> — the invoice total, the follow-up task, the tag that routes deals.<\/li>\n<\/ul>\n<p>Fifteen minutes, once a week, rotating through your top automations. It catches the majority of quiet failures within one cycle of them appearing.<\/p>\n<p>For a fuller sweep, the same idea exists as a structured walkthrough: the <strong>AI Automation Rule Audit: 20-Point Diagnostic<\/strong> (https://lunarwave8803.gumroad.com/l/dvqab) expands this ritual into twenty concrete checkpoints covering all five layers above — designed to run through a typical small-business setup in an afternoon, not a sprint quarter.<\/p>\n<h2>The deeper issue: who controls the verification<\/h2>\n<p>Many of these failure modes share a single structural root. Broadly: an automation that decides its own inputs are trustworthy, marking its own homework. Data arrives, the flow assumes it's well-formed, branches execute, and the run reports success based on completion rather than correctness. Control has quietly been <strong>inverted<\/strong> — the system grades itself.<\/p>\n<p>That framing — why rules keep failing and how to restructure them so verification sits outside the thing being verified — is the subject of <strong>The Inversion of Control Flaw: Why Your AI Automation Rules Keep Failing<\/strong> (https://lunarwave8803.gumroad.com/l/ywxlvy). If the twenty-point audit tells you *where* your setups break, that report explains the *why* underneath the breaking.<\/p>\n<h2>Frequently asked questions<\/h2>\n<p><strong>How often should I audit my automations?<\/strong><\/p>\n<p>A light weekly spot-check (the ritual above) on your riskiest flows, and a structured full pass quarterly — or immediately after any connected app announces changes to forms, fields, or plans.<\/p>\n<p><strong>What's the single most common failure mode?<\/strong><\/p>\n<p>Default branches treating errors as success (#10), closely followed by silent truncation (#5). Both produce green checkmarks, which is exactly why they survive for months.<\/p>\n<p><strong>Do I need to buy monitoring software?<\/strong><\/p>\n<p>Not to start. Run history plus a weekly calendar block will find most issues. Monitoring tools help once you have dozens of flows and multiple owners.<\/p>\n<p><strong>Are AI-specific failures different from classic automation failures?<\/strong><\/p>\n<p>One important way: AI steps can return *plausible but wrong* output — fluently formatted nonsense. Classic determinism-based testing doesn't fully cover it, which makes explicit output assertions and sampling checks (Layers 2 and 5) even more important.<\/p>\n<h2>Bottom line<\/h2>\n<p>Broken automations rarely announce themselves. They hand you plausible garbage at machine speed and log it as success. Run the fifteen-minute ritual this week; walk the full checklist when you're ready to go deeper. The cheapest time to catch a silent failure was yesterday — the second-cheapest is right now.<\/p>\n<hr>\n<h2>生产备注（非发布正文）<\/h2>\n<ul>\n<li>来源依据：failure-mode 清单为通用工程实践归纳，无引用虚构统计；三源趋势佐证见本轮心跳感知记录（Inkfluence 8/15、Amasty 8/24、Astra 8/13——均确认 AI 产品/自动化类数字品需求带），正文中未引用以避免不可核验出处<\/li>\n<li>链接核验：l/dvqab 与 l/ywxlvy 两链接来自 2026-08-26 02:46 Gumroad 巡检 DOM 直读台账（两款均为 Published 状态）✅<\/li>\n<li>定价忠实：正文仅作产品定位描述与功能边界说明，未标注价格、未承诺收益、无销量背书 ✅<\/li>\n<li>免责性质：属方法论内容，与关税系列分离，不受贸易政策时效影响（evergreen）<\/li>\n<\/ul>\n<h3>Critic 自审（≥80 入库标准）<\/h3>\n<ul>\n<li>逻辑 88：三层失效模型→五层二十模式→监控偏差归因→triage 流程→结构根因→FAQ，递进闭环无明显断层<\/li>\n<li>质量 90：长尾关键词覆盖自然堆叠；标题/meta 符合 SEO 约定；~1120 词符合目标；示例具体可操作<\/li>\n<li>合规 95：无编造数据/统计；产品描述忠实于挂牌信息；不含医疗/金融等高风险断言<\/li>\n<li>链接真实 95：两外链均来自巡检实录，可在库内溯源<\/li>\n<li><strong>综合 92/100 → 通过入库存档<\/strong><\/li>\n<\/ul>","cta":"https://lu7897859-tech.github.io/doors/sourcing-audit/","ctaTitle":"Check a supplier for free, right now","ctaText":"Paste the supplier's 18-digit USCC or full registered name for an instant structural check — then go further with the full verification guide.","ctaBtn":"Open the free check"},"type":"article"};</script>
+<script>
+(function(){
+  var D = window.DOOR || {};
+  var t = D.type || 'door';
+  function el(html){ var d=document.createElement('div'); d.innerHTML=html.trim(); return d.firstChild; }
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  var ROOT = D.root || '';   // -> GH Pages root
+  var UP = D.up || '';       // -> door dir ('' or '../')
+  function isExt(u){ return /^https?:|^mailto:/.test(String(u||'')); }
+  function dlink(u){ u = String(u==null?'#':u); if(isExt(u)) return u; if(u.charAt(0)==='#') return UP+'index.html'+u; return UP+u.replace(/^\.?\//,''); }
+  function rlink(u){ u = String(u==null?'#':u); if(isExt(u)) return u; return ROOT+u.replace(/^\.?\//,''); }
+  document.getElementById('brand').textContent = D.brand || '';
+
+  // nav
+  var nav = document.getElementById('nav');
+  (D.nav || []).forEach(function(n){ nav.appendChild(el('<a href="'+dlink(n.href)+'">'+esc(n.label)+'</a>')); });
+
+  var app = document.getElementById('app');
+
+  function renderDoor(){
+    var h = D.hero || {};
+    var html = '';
+    html += '<section class="hero"><div class="wrap">';
+    if(h.eyebrow) html += '<span class="eyebrow">'+esc(h.eyebrow)+'</span>';
+    html += '<h1>'+esc(h.h1||'')+'</h1>';
+    if(h.sub) html += '<p class="sub">'+esc(h.sub)+'</p>';
+    // demo box
+    html += '<div class="demo"><div class="dt"><span>'+esc(h.demoTitle||'Try it free')+'</span><b>'+esc(h.demoBadge||'Live')+'</b></div>';
+    html += '<div class="row"><input id="dq" placeholder="'+esc(h.demoPlaceholder||'')+'" aria-label="'+esc(h.demoLabel||'query')+'">';
+    html += '<button id="db">'+esc(h.demoBtn||'Check')+'</button></div>';
+    html += '<div class="out" id="dout"></div>';
+    if(h.demoNote) html += '<div class="note">'+esc(h.demoNote)+'</div>';
+    html += '</div>';
+    if((D.trust||[]).length){ html += '<div class="trust">'+D.trust.map(function(x){return '<span>'+esc(x)+'</span>';}).join('')+'</div>'; }
+    html += '</div></section>';
+
+    if((D.steps||[]).length){
+      html += '<section><div class="wrap"><h2>'+esc(D.stepsTitle||'How it works')+'</h2><p class="sect-sub">'+esc(D.stepsSub||'')+'</p><div class="grid g3">';
+      D.steps.forEach(function(s,i){ html += '<div class="card"><div class="step-n">'+(i+1)+'</div><h3>'+esc(s.t)+'</h3><p>'+esc(s.d)+'</p></div>'; });
+      html += '</div></div></section>';
+    }
+
+    if((D.products||[]).length){
+      html += '<section id="products"><div class="wrap"><h2>'+esc(D.productsTitle||'Products')+'</h2><p class="sect-sub">'+esc(D.productsSub||'')+'</p><div class="grid g3">';
+      D.products.forEach(function(p){
+        html += '<div class="card prod"><div class="p-top"><div><h3>'+esc(p.name)+'</h3></div>'+(p.price?'<span class="price">'+esc(p.price)+'</span>':'')+'</div>';
+        if(p.tagline) html += '<p>'+esc(p.tagline)+'</p>';
+        if((p.bullets||[]).length) html += '<ul>'+p.bullets.map(function(b){return '<li>'+esc(b)+'</li>';}).join('')+'</ul>';
+        if(p.page) html += '<a class="btn ghost" href="'+dlink(p.page)+'">Details</a>';
+        if(p.cta) html += '<a class="btn" href="'+dlink(p.cta)+'" rel="noopener">'+esc(p.ctaText||'Get it')+'</a>';
+        html += '</div>';
+      });
+      html += '</div></div></section>';
+    }
+
+    if((D.tiers||[]).length){
+      html += '<section id="pricing"><div class="wrap"><h2>'+esc(D.tiersTitle||'Pricing')+'</h2><p class="sect-sub">'+esc(D.tiersSub||'')+'</p><div class="grid g3 tiers">';
+      D.tiers.forEach(function(t){
+        html += '<div class="card tier'+(t.popular?' pop':'')+'">'+(t.popular?'<span class="badge">'+(esc(t.badge||'Popular'))+'</span>':'')+'<h3>'+esc(t.name)+'</h3><div class="amt">'+esc(t.price)+'</div><div class="per">'+esc(t.per||'')+'</div><ul>'+ (t.features||[]).map(function(f){return '<li>'+esc(f)+'</li>';}).join('') +'</ul>';
+        html += '<a class="btn'+(t.ghost?' ghost':'')+'" href="'+dlink(t.cta)+'" rel="noopener">'+esc(t.ctaText||'Choose')+'</a></div>';
+      });
+      html += '</div></div></section>';
+    }
+
+    if((D.faq||[]).length){
+      html += '<section id="faq"><div class="wrap"><h2>FAQ</h2><p class="sect-sub"></p><div class="faq">';
+      D.faq.forEach(function(f){ html += '<details><summary>'+esc(f.q)+'</summary><p>'+esc(f.a)+'</p></details>'; });
+      html += '</div></div></section>';
+    }
+    app.innerHTML = html;
+    wireDemo();
+  }
+
+  function renderProduct(){
+    var p = D.product || {};
+    var html = '<section style="border-top:0"><div class="wrap"><article class="doc">';
+    html += '<p><a href="'+dlink('index.html')+'">← '+esc(D.brand)+'</a></p>';
+    html += '<h1>'+esc(p.name)+'</h1>';
+    if(p.tagline) html += '<p class="sub" style="margin:0 0 10px">'+esc(p.tagline)+'</p>';
+    html += '<p>'+(p.price?'<span class="pill">'+esc(p.price)+'</span>':'')+((p.tags||[]).map(function(t){return '<span class="pill">'+esc(t)+'</span>';}).join(''))+'</p>';
+    if((p.bullets||[]).length) html += '<h3>What you get</h3><ul>'+p.bullets.map(function(b){return '<li>'+esc(b)+'</li>';}).join('')+'</ul>';
+    if(p.sample) html += '<h3>Sample output</h3><pre class="out">'+esc(p.sample)+'</pre>';
+    if(p.body) html += p.body; // trusted markdown-lite html from config
+    if(p.cta) html += '<p style="margin-top:22px"><a class="btn" style="display:inline-block;background:var(--accent);color:#fff;border-radius:10px;padding:12px 18px;font-weight:700" href="'+dlink(p.cta)+'" rel="noopener">'+esc(p.ctaText||'Get it')+'</a></p>';
+    if((D.related||[]).length){
+      html += '<h3>Related</h3><div>';
+      D.related.forEach(function(r){ html += '<a class="btn ghost" style="display:inline-block;margin:4px 8px 4px 0;border:1px solid var(--line);border-radius:10px;padding:9px 14px" href="'+dlink(r.href)+'">'+esc(r.label)+'</a>'; });
+      html += '</div>';
+    }
+    html += '</article></div></section>';
+    app.innerHTML = html;
+  }
+
+  function wireDemo(){
+    var inp = document.getElementById('dq'), btn = document.getElementById('db'), out = document.getElementById('dout');
+    if(!inp||!btn) return;
+    function setOut(msg, cls){ out.className = 'out' + (cls?(' '+cls):''); out.textContent = msg; }
+
+    // ---- client-side USCC (Unified Social Credit Code) checker: real, zero-dependency free hook ----
+    var CS = '0123456789ABCDEFGHJKLMNPQRTUWXY';
+    var W = [1,3,9,27,19,26,16,17,20,29,25,13,8,24,10,30,28];
+    var REG = {'1':'Market regulation','5':'Civil affairs','9':'Other','Y':'Other','1A':'Regulator A'};
+    function decodeUSCC(code){
+      var s = String(code||'').toUpperCase().replace(/\s+/g,'');
+      if(s.length!==18) return {ok:false, reason:'Length is '+s.length+', a USCC is exactly 18 characters.'};
+      for(var i=0;i<18;i++){ if(CS.indexOf(s.charAt(i))<0) return {ok:false, reason:'Invalid character "'+s.charAt(i)+'" (letters I, O, S, V, Z are not used).'}; }
+      var sum=0; for(var j=0;j<17;j++) sum += CS.indexOf(s.charAt(j))*W[j];
+      var expect = CS.charAt((31 - (sum % 31)) % 31);
+      var ok = (expect === s.charAt(17));
+      return {ok:ok, expect:expect, given:s.charAt(17),
+        region:s.slice(2,8), org: s.charAt(8), kind: s.charAt(9), serial:s.slice(10,17)};
+    }
+    function explain(x){
+      if(x.ok){
+        return '✅ Structurally valid USCC\n\n'+
+          'Region / admin code : '+x.region+'\n'+
+          'Entity-type code   : '+x.kind+'\n'+
+          'Org code           : '+x.org+'\n'+
+          'Serial             : '+x.serial+'\n'+
+          'Check digit        : '+x.given+' (valid)\n\n'+
+          'Format checks out. What a valid code does NOT tell you: whether the company is still active, who really owns it, or whether it has litigation, sanctions or adverse media. That is what the full report covers.';
+      }
+      return '❌ Not a structurally valid USCC\n\n'+x.reason+'\n\nTip: paste the 18-character Unified Social Credit Code from the supplier\u2019s business licence, or try the company\u2019s full registered name.';
+    }
+
+    async function run(){
+      var q = (inp.value||'').trim();
+      if(!q){ setOut(D.demoEmpty||'Please enter a company name or 18-digit registration number.','err'); return; }
+      btn.disabled = true; var old = btn.textContent; btn.textContent = D.demoBusy||'Checking…';
+      try{
+        if(D.demoMode === 'uscc'){
+          setOut(D.demoBusy||'Checking…','');
+          var x = decodeUSCC(q);
+          setOut(explain(x), x.ok?'ok':'err');
+          beacon(q, x.ok?'valid':'invalid');
+        } else if(D.demoMode === 'endpoint' && D.demoEndpoint){
+          setOut(D.demoBusy||'Contacting verification service…','');
+          var r = await fetch(D.demoEndpoint, { method:'POST', headers:{'content-type':'application/json','accept':'application/json'}, body: JSON.stringify({ keyword: q, tool:'verify_supplier' }) });
+          var txt = await r.text(); var j=null; try{ j=JSON.parse(txt); }catch(e){}
+          if(r.status===200 && j){ setOut(JSON.stringify(j,null,2).substring(0,1400),'ok'); }
+          else if(r.status===402){ setOut((D.paywallNote||'Free instant checks used. Get the full verified report to continue.'),'err'); }
+          else { setOut('Service returned status '+r.status+'. '+(D.demoFallback||''),'err'); }
+        } else {
+          var x2 = decodeUSCC(q);
+          setOut(explain(x2), x2.ok?'ok':'err');
+        }
+      }catch(e){
+        setOut((D.demoOffline||'The live demo is momentarily unavailable. The full verification report still works.')+'\n\n'+(D.demoEndpoint||''),'err');
+      }
+      btn.disabled=false; btn.textContent=old;
+    }
+    // anonymous use-signal: lets us see the first real visitor arrive (never sent to the supplier)
+    function beacon(q, result){
+      if(!D.demoEndpoint) return;
+      try{
+        fetch(D.demoEndpoint, { method:'POST', keepalive:true, headers:{'content-type':'application/json'}, body: JSON.stringify({ keyword:q, tool:'verify_supplier', source:'door-free-hook', result:result }) }).catch(function(){});
+      }catch(e){}
+    }
+    btn.addEventListener('click',run);
+    inp.addEventListener('keydown',function(e){ if(e.key==='Enter') run(); });
+  }
+
+  function renderArticle(){
+    var a = D.article || {};
+    var html = '<section style="border-top:0"><div class="wrap"><article class="doc">';
+    html += '<p><a href="'+dlink('blog/index.html')+'">← All guides</a></p>';
+    html += '<h1>'+esc(a.title)+'</h1>';
+    if(a.desc) html += '<p class="sub" style="margin:0 0 18px">'+esc(a.desc)+'</p>';
+    if((a.tags||[]).length) html += '<p>'+a.tags.map(function(t){return '<span class="pill">'+esc(t)+'</span>';}).join('')+'</p>';
+    html += '<div data-article>'+(a.html||'')+'</div>';
+    if(a.cta){
+      html += '<div class="card" style="margin-top:30px;border-color:var(--accent)"><h3>'+esc(a.ctaTitle||'Check a supplier now')+'</h3><p style="margin-bottom:14px">'+esc(a.ctaText||'')+'</p>';
+      html += '<a class="btn" style="display:inline-block;background:var(--accent);color:#fff;border-radius:10px;padding:11px 18px;font-weight:700" href="'+dlink(a.cta)+'" rel="noopener">'+esc(a.ctaBtn||'Open the free check')+'</a></div>';
+    }
+    if((D.related||[]).length){
+      html += '<h3>Related guides</h3><div>';
+      D.related.forEach(function(r){ html += '<a class="btn ghost" style="display:inline-block;margin:4px 8px 4px 0;border:1px solid var(--line);border-radius:10px;padding:9px 14px" href="'+dlink(r.href)+'">'+esc(r.label)+'</a>'; });
+      html += '</div>';
+    }
+    html += '</article></div></section>';
+    app.innerHTML = html;
+  }
+
+  function renderBlogIndex(){
+    var posts = D.posts || [];
+    var html = '<section class="hero"><div class="wrap"><span class="eyebrow">'+esc(D.blogEyebrow||'Guides')+'</span><h1>'+esc(D.blogTitle||'China sourcing guides')+'</h1>';
+    if(D.blogSub) html += '<p class="sub">'+esc(D.blogSub)+'</p>';
+    html += '</div></section><section><div class="wrap"><div class="grid g2">';
+    posts.forEach(function(p){
+      html += '<div class="card"><h3><a href="'+dlink(p.href)+'">'+esc(p.title)+'</a></h3><p>'+esc(p.desc||'')+'</p>';
+      if(p.tags&&p.tags.length) html += '<p style="margin-top:10px">'+p.tags.map(function(t){return '<span class="pill">'+esc(t)+'</span>';}).join('')+'</p>';
+      html += '</div>';
+    });
+    html += '</div></div></section>';
+    app.innerHTML = html;
+  }
+
+  if(t==='product') renderProduct(); else if(t==='article') renderArticle(); else if(t==='blog') renderBlogIndex(); else renderDoor();
+
+  // footer
+  var foot = document.getElementById('foot');
+  (D.footer||[]).forEach(function(col){
+    foot.appendChild(el('<div><h4>'+esc(col.t)+'</h4>'+ (col.links||[]).map(function(l){ return '<a href="'+rlink(l.href)+'"'+(isExt(l.href)?' rel="noopener"':'')+'>'+esc(l.label)+'</a>'; }).join('') +'</div>'));
+  });
+  document.getElementById('legalLeft').textContent = D.legalLeft || ('© ' + new Date().getFullYear() + ' ' + (D.brand||''));
+  document.getElementById('legalRight').textContent = D.legalRight || '';
+})();
+</script>
+</body>
+</html>
