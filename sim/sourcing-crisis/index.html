@@ -86,7 +86,7 @@ border-left:3px solid var(--accent);border-radius:12px;padding:16px;margin:16px 
 
 <section class="screen" id="s-result">
   <div class="timer"><span>⏱️ 诊断报告有效期</span><b id="tLeft2">--:--</b></div>
-  <div class="hd"><span class="em">__RESULT_EMOJI__</span><h1 id="verdictTitle"></h1><p id="verdictSub"></p></div>
+  <div class="hd"><span class="em" id="verdictEmoji">⚠️</span><h1 id="verdictTitle"></h1><p id="verdictSub"></p></div>
   <div class="card">
     <div class="step">你的采购风险画像</div>
     <div class="gauge" id="gauge"></div>
@@ -145,7 +145,8 @@ function finish(timeout){
   var worst=null,wv=-1; Object.keys(pct).forEach(function(k){ var risk=dims[k].risk==='low'?100-pct[k]:pct[k]; if(risk>wv){wv=risk;worst=k} });
   var d=dims[worst], v=(window.SIM.verdicts||{})[worst]||{};
   $('verdictTitle').textContent=v.title||d.label;
-  $('verdictSub').textContent=v.sub||'';
+  $('verdictSub').textContent=(v.sub||'').replace('{step}',window.SIM.nodes.length);
+  if($('verdictEmoji')) $('verdictEmoji').textContent=v.emoji||'⚠️';
   // 仪表
   var g=$('gauge'); g.innerHTML='';
   Object.keys(dims).forEach(function(k){
