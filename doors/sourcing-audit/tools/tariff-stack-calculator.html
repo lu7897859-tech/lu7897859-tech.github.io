@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 US-China Tariff Stack Calculator — Estimate Your Effective Duty</title>
+<meta name="description" content="Free interactive calculator: estimate the total effective US tariff stacking on your China imports — Section 301 Lists, 2026 forced-labor measures, and the reported new 7.5% overcapacity layer. Confirmed vs reported, clearly separated.">
+<link rel="canonical" href="https://lu7897859-tech.github.io/doors/sourcing-audit/tools/tariff-stack-calculator.html">
+<meta property="og:title" content="2026 US-China Tariff Stack Calculator — Estimate Your Effective Duty">
+<meta property="og:description" content="Estimate the total effective US tariff stacking on your China imports — confirmed vs reported layers, clearly separated.">
+<meta property="og:type" content="website">
+<style>
+  :root{
+    --ink:#10202e; --ink-soft:#3d5568; --bg:#f4f7fa; --card:#ffffff;
+    --line:#dbe4ec; --accent:#0f6bbd; --accent-dark:#0a4e8c; --accent-soft:#e8f2fc;
+    --good:#1a7f37; --warn:#b45309; --bad:#b91c1c; --warn-bg:#fff7e6; --bad-bg:#fdecec; --good-bg:#eaf7ee;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; background:var(--bg); color:var(--ink); line-height:1.55; padding-bottom:60px;}
+  .wrap{max-width:1000px; margin:0 auto; padding:0 20px;}
+  header{background:linear-gradient(135deg,#0a4e8c,#0f6bbd 60%,#1a8cc8); color:#fff; padding:36px 0 30px;}
+  header h1{font-size:26px; font-weight:800; letter-spacing:-.3px; margin-bottom:8px;}
+  header p{opacity:.92; font-size:15px; max-width:760px;}
+  .tag{display:inline-block; background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.35); border-radius:20px; padding:2px 12px; font-size:12px; margin-bottom:12px; letter-spacing:.3px;}
+  main{margin-top:24px; display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px 22px; box-shadow:0 1px 3px rgba(16,32,46,.06);}
+  .card h2{font-size:16px; font-weight:700; margin-bottom:14px; display:flex; align-items:center; gap:8px;}
+  .step-badge{background:var(--accent); color:#fff; border-radius:6px; width:22px; height:22px; display:inline-flex; align-items:center; justify-content:center; font-size:12px; font-weight:700;}
+  .field{margin-bottom:16px;}
+  .field label{display:block; font-size:13px; font-weight:600; color:var(--ink-soft); margin-bottom:6px;}
+  .field .hint{font-size:12px; color:#7a8fa3; font-weight:400; display:block; margin-top:3px;}
+  input[type=number], select{width:100%; padding:9px 12px; border:1px solid var(--line); border-radius:8px; font-size:15px; background:#fbfdff; color:var(--ink);}
+  input[type=number]:focus, select:focus{outline:2px solid var(--accent-soft); border-color:var(--accent);}
+  .toggle{display:flex; align-items:flex-start; gap:10px; padding:10px 0; border-bottom:1px dashed var(--line); cursor:pointer;}
+  .toggle:last-of-type{border-bottom:none;}
+  .toggle input{width:18px; height:18px; margin-top:2px; accent-color:var(--accent);}
+  .toggle .t-title{font-size:14px; font-weight:600;}
+  .toggle .t-sub{font-size:12px; color:#7a8fa3;}
+  .toggle .rate-pill{font-size:12px; font-weight:700; padding:1px 8px; border-radius:12px; white-space:nowrap;}
+  .pill-conf{background:var(--good-bg); color:var(--good);}
+  .pill-rep{background:var(--warn-bg); color:var(--warn);}
+  .pill-base{background:#eef1f5; color:var(--ink-soft);}
+  .results{grid-column:1 / -1;}
+  .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:16px;}
+  .stat{background:#f7fafc; border:1px solid var(--line); border-radius:10px; padding:14px 16px;}
+  .stat .k{font-size:12px; color:var(--ink-soft); font-weight:600; text-transform:uppercase; letter-spacing:.4px;}
+  .stat .v{font-size:24px; font-weight:800; margin-top:4px; letter-spacing:-.5px;}
+  .stat .s{font-size:12px; color:#7a8fa3; margin-top:2px;}
+  table{width:100%; border-collapse:collapse; font-size:14px; margin-top:8px;}
+  th,td{text-align:left; padding:9px 10px; border-bottom:1px solid var(--line);}
+  th{font-size:12px; text-transform:uppercase; letter-spacing:.4px; color:var(--ink-soft); background:#f7fafc;}
+  td.num, th.num{text-align:right;}
+  tfoot td{font-weight:800; border-top:2px solid var(--ink); background:#f7fafc;}
+  .scenario-toggle{display:flex; gap:8px; margin-bottom:14px;}
+  .scenario-toggle button{flex:1; padding:9px 10px; border:1px solid var(--line); border-radius:8px; background:#fff; font-size:13px; font-weight:600; cursor:pointer; color:var(--ink-soft);}
+  .scenario-toggle button.active{background:var(--accent); border-color:var(--accent); color:#fff;}
+  .note{font-size:12.5px; color:var(--ink-soft); background:#f7fafc; border-left:3px solid var(--accent); padding:10px 12px; border-radius:0 8px 8px 0; margin-top:14px;}
+  .disclaimer{background:var(--warn-bg); border:1px solid #f0d9a8; border-radius:10px; padding:12px 14px; font-size:12.5px; color:#7c4a03; margin-top:14px;}
+  .band{display:flex; gap:8px; align-items:center; margin-top:12px;}
+  .band .bar{flex:1; height:10px; border-radius:5px; background:linear-gradient(90deg,#1a7f37 0%,#d97706 40%,#b91c1c 75%,#7f1d1d 100%); position:relative;}
+  .band .marker{position:absolute; top:-4px; width:3px; height:18px; background:var(--ink); border-radius:2px;}
+  .band .lbl{font-size:12px; color:var(--ink-soft); white-space:nowrap;}
+  .cta{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:18px;}
+  .cta a{display:block; background:var(--accent-soft); border:1px solid #cfe2f6; border-radius:10px; padding:12px 14px; color:var(--accent-dark); text-decoration:none; font-size:13px;}
+  .cta a b{display:block; font-size:14px; margin-bottom:2px;}
+  .cta a:hover{border-color:var(--accent);}
+  .sources{font-size:12px; color:#7a8fa3; margin-top:16px; line-height:1.7;}
+  .sources a{color:var(--accent); text-decoration:none;}
+  .sources a:hover{text-decoration:underline;}
+  footer{max-width:1000px; margin:0 auto; padding:0 20px; margin-top:28px; font-size:12px; color:#7a8fa3;}
+  @media (max-width:760px){ main{grid-template-columns:1fr;} .grid3{grid-template-columns:1fr;} .cta{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <span class="tag">FREE TOOL · Updated Aug 27, 2026</span>
+    <h1>2026 US–China Tariff Stack Calculator</h1>
+    <p>Your goods don't carry "one tariff." They carry a <b>stack</b> — Section 301 Lists, the 2026 forced-labor measure, and possibly a new reported 7.5% overcapacity layer. Enter your product value and check the layers that apply to see your real effective duty and landed cost.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="card">
+    <h2><span class="step-badge">1</span> Your shipment</h2>
+    <div class="field">
+      <label for="value">Product / customs value (USD) <span class="hint">Use your FOB or customs invoice value — the base the duties are calculated on.</span></label>
+      <input type="number" id="value" min="0" step="100" value="10000">
+    </div>
+    <div class="field">
+      <label for="freight">Freight + insurance, if you want landed cost (USD)</label>
+      <input type="number" id="freight" min="0" step="50" value="800">
+    </div>
+    <div class="field">
+      <label for="base">Your product's base (MFN) duty rate (%) <span class="hint">The normal customs duty before any China-specific actions. Look up your HTS line; many electronics and general goods are 0%, many textiles 5–15%.</span></label>
+      <input type="number" id="base" min="0" max="60" step="0.5" value="0">
+    </div>
+  </div>
+
+  <div class="card">
+    <h2><span class="step-badge">2</span> Which layers apply to your goods?</h2>
+
+    <label class="toggle">
+      <input type="checkbox" id="l301list13">
+      <div>
+        <div class="t-title">Section 301 — Lists 1–3 <span class="rate-pill pill-conf">+25%</span></div>
+        <div class="t-sub">2018–2019 actions on ~$250B of machinery, electronics, components, auto parts. Confirmed &amp; live.</div>
+      </div>
+    </label>
+
+    <label class="toggle">
+      <input type="checkbox" id="l301list4" checked>
+      <div>
+        <div class="t-title">Section 301 — List 4A / 4B <span class="rate-pill pill-conf">+7.5%</span></div>
+        <div class="t-sub">Remaining consumer goods, reduced to 7.5% under Phase One (Feb 2020). Confirmed &amp; live.</div>
+      </div>
+    </label>
+
+    <label class="toggle">
+      <input type="checkbox" id="lforced" checked>
+      <div>
+        <div class="t-title">2026 forced-labor Section 301 <span class="rate-pill pill-conf">+12.5%</span></div>
+        <div class="t-sub">New 301 measure effective 7/24/2026 — 12.5% for China (10% for 17 other economies). Confirmed &amp; live.</div>
+      </div>
+    </label>
+
+    <label class="toggle">
+      <input type="checkbox" id="lnew75">
+      <div>
+        <div class="t-title">New overcapacity tariff (reported) <span class="rate-pill pill-rep">+7.5%?</span></div>
+        <div class="t-sub">AP / Seattle Times (Aug 24–25): 7.5% under consideration over cheap-goods flooding. <b>Reported — not yet law.</b> Toggle on to model the scenario.</div>
+      </div>
+    </label>
+
+    <label class="toggle">
+      <input type="checkbox" id="ldeMinimis" checked>
+      <div>
+        <div class="t-title">De minimis exemption <span class="rate-pill pill-base">suspended</span></div>
+        <div class="t-sub">The $800 exemption is suspended — shipments to U.S. consumers are subject to duties again. Included so you know it's not a workaround.</div>
+      </div>
+    </label>
+
+    <div class="note">Only check a layer if your product's HTS line is actually in scope. The single biggest cost error in tariff planning is assuming your goods are covered when they aren't — or assuming they aren't when they are.</div>
+  </div>
+
+  <div class="card results">
+    <h2><span class="step-badge">3</span> Your effective duty &amp; landed cost</h2>
+
+    <div class="scenario-toggle">
+      <button id="scnCurrent" class="active" onclick="setScenario('current')">Current rules (confirmed only)</button>
+      <button id="scnNew" onclick="setScenario('new')">+ Reported 7.5% layer (model it)</button>
+    </div>
+
+    <div class="grid3">
+      <div class="stat">
+        <div class="k">Total effective duty</div>
+        <div class="v" id="statRate">—</div>
+        <div class="s" id="statRateSub">all layers combined</div>
+      </div>
+      <div class="stat">
+        <div class="k">Duty amount (USD)</div>
+        <div class="v" id="statDuty">—</div>
+        <div class="s">on your product value</div>
+      </div>
+      <div class="stat">
+        <div class="k">Landed cost (USD)</div>
+        <div class="v" id="statLanded">—</div>
+        <div class="s">value + freight + duty</div>
+      </div>
+    </div>
+
+    <table id="tbl">
+      <thead>
+        <tr><th>Layer</th><th class="num">Rate</th><th class="num">Amount (USD)</th><th>Status</th></tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+      <tfoot id="tfoot"></tfoot>
+    </table>
+
+    <div class="band">
+      <span class="lbl">Avg. China duty Jul 2026 ≈ 36.5%</span>
+      <div class="bar"><div class="marker" id="avgMarker" style="left:36.5%"></div><div class="marker" id="yourMarker" style="left:0%"></div></div>
+      <span class="lbl" id="bandLbl">your total: —</span>
+    </div>
+    <div style="font-size:11.5px;color:#7a8fa3;margin-top:4px;">● average reference (CRS, Aug 18 2026) &nbsp; ● your total — compare to see if you're above or below the current average.</div>
+
+    <div class="disclaimer">
+      <b>Confirmed vs. reported — read this before quoting anyone.</b> "Current rules" above includes only measures in the official record: Section 301 Lists 1–3 (25%), List 4A/4B (7.5%), and the 2026 forced-labor Section 301 (12.5% for China). The 7.5% overcapacity tariff is <b>reported, not final</b> — modeling it is smart planning, quoting it as law is a mistake. This tool is an estimator, not a customs ruling: your actual duty depends on your specific HTS classification, country of origin, and entry details. Verify against USTR.gov and the Federal Register before making business decisions.
+    </div>
+
+    <div class="cta">
+      <a href="https://lunarwave8803.gumroad.com/l/section301" target="_blank" rel="noopener"><b>Section 301 Tariff Quick-Check Guide — $14</b>Two-minute workflow to check which action lists &amp; exclusion processes cover your HTS lines.</a>
+      <a href="https://lunarwave8803.gumroad.com/l/kbgmsy" target="_blank" rel="noopener"><b>Verify Chinese Suppliers — $14</b>Free-hook companion: the 7 red flags &amp; 30-minute verification sequence before you wire money.</a>
+    </div>
+  </div>
+
+  <div class="sources" style="grid-column:1/-1;">
+    <b>Sources (verified via search 2026-08-27):</b>
+    · CRS — U.S.-China Tariff Actions Since 2018 (avg. ~36.5%, 12.5% forced-labor 301; Aug 18 2026): <a href="https://www.congress.gov/crs-product/IF12990" target="_blank" rel="noopener">congress.gov/crs-product/IF12990</a>
+    · STR Trade — Section 301 rates 7.5%–25%, exclusions extended to Nov 10 2026: <a href="https://www.strtrade.com/trade-news-resources/tariff-actions-resources/section-301-tariffs-on-china" target="_blank" rel="noopener">strtrade.com</a>
+    · NAM — 301 measure on 60 partners, 10% / 12.5%: <a href="https://nam.org/u-s-imposes-sweeping-tariffs-under-section-301" target="_blank" rel="noopener">nam.org</a>
+    · Wiley — Trump Administration Tariff Tracker: <a href="https://www.wiley.law/trump-administration-tariff-tracker" target="_blank" rel="noopener">wiley.law</a>
+    · AP / Seattle Times — reported 7.5% overcapacity tariff (Aug 24–25, 2026).
+  </div>
+</main>
+
+<footer>
+  Free 0-credit tool · produced locally · not legal, customs, or tax advice. Always verify against USTR.gov and the Federal Register.
+</footer>
+
+<script>
+(function(){
+  var layers = {
+    base:    {label:'Base (MFN) duty',           rate:function(){return v('base');},            conf:true,  cls:'pill-base', show:function(){return v('base')>0;}},
+    l301:    {label:'Section 301 — Lists 1–3',   rate:function(){return 25;},                    conf:true,  cls:'pill-conf', show:function(){return el('l301list13').checked;}},
+    l4:      {label:'Section 301 — List 4A/4B',  rate:function(){return 7.5;},                   conf:true,  cls:'pill-conf', show:function(){return el('l301list4').checked;}},
+    forced:  {label:'2026 forced-labor 301 (China)', rate:function(){return 12.5;},              conf:true,  cls:'pill-conf', show:function(){return el('lforced').checked;}},
+    new75:   {label:'New overcapacity tariff (reported)', rate:function(){return 7.5;},          conf:false, cls:'pill-rep', show:function(){return el('lnew75').checked;}}
+  };
+  var order = ['base','l301','l4','forced','new75'];
+  var scenario = 'current'; // current | new
+
+  function el(id){return document.getElementById(id);}
+  function v(id){return parseFloat(el(id).value)||0;}
+
+  function setScenario(s){
+    scenario = s;
+    el('scnCurrent').classList.toggle('active', s==='current');
+    el('scnNew').classList.toggle('active', s==='new');
+    el('lnew75').checked = (s==='new');
+    render();
+  }
+  window.setScenario = setScenario;
+
+  function compute(){
+    var value = v('value'), freight = v('freight');
+    var rows = [], total = 0;
+    order.forEach(function(k){
+      var L = layers[k];
+      if(!L.show()) return;
+      if(k==='new75' && scenario==='current') return;
+      var rate = L.rate();
+      var amount = value * rate/100;
+      total += rate;
+      rows.push({label:L.label, rate:rate, amount:amount, conf:L.conf, cls:L.cls});
+    });
+    var duty = value * total/100;
+    return {value:value, freight:freight, rows:rows, totalRate:total, duty:duty};
+  }
+
+  function fmt(n, dec){ return '$' + n.toLocaleString('en-US',{minimumFractionDigits:dec==null?0:dec, maximumFractionDigits:dec==null?0:dec}); }
+
+  function render(){
+    var r = compute();
+    el('statRate').textContent = r.totalRate.toFixed(1) + '%';
+    el('statRateSub').textContent = (scenario==='new' && el('lnew75').checked) ? 'incl. reported 7.5% (model)' : (scenario==='new' ? 'reported layer toggled off' : 'all confirmed layers');
+    el('statDuty').textContent = fmt(r.duty);
+    el('statLanded').textContent = fmt(r.value + r.freight + r.duty);
+    var tb = el('tbody'); tb.innerHTML='';
+    r.rows.forEach(function(row){
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td>'+row.label+'</td><td class="num">+'+row.rate.toFixed(1)+'%</td><td class="num">'+fmt(row.amount,2)+'</td><td>'+(row.conf?'<span class="rate-pill pill-conf">confirmed</span>':'<span class="rate-pill pill-rep">reported</span>')+'</td>';
+      tb.appendChild(tr);
+    });
+    el('tfoot').innerHTML = '<tr><td>Total effective duty</td><td class="num">'+r.totalRate.toFixed(1)+'%</td><td class="num">'+fmt(r.duty,2)+'</td><td></td></tr>';
+    // position marker: clamp to 0-100%
+    var pct = Math.min(100, Math.max(0, r.totalRate));
+    el('yourMarker').style.left = pct + '%';
+    el('bandLbl').textContent = 'your total: '+r.totalRate.toFixed(1)+'%';
+  }
+
+  ['value','freight','base','l301list13','l301list4','lforced','lnew75'].forEach(function(id){
+    var node = el(id);
+    if(node.type==='checkbox'){ node.addEventListener('change', render); }
+    else { node.addEventListener('input', render); }
+  });
+  render();
+})();
+</script>
+</body>
+</html>
