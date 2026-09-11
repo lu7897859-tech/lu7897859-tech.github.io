@@ -29,6 +29,11 @@ https://lu7897859-tech.github.io/launch-torch/.well-known/agent-card.json
 - Verification guide ($14): https://lunarwave8803.gumroad.com/l/kbgmsy
 - MCP server (pay per call): https://lu7897859-tech.github.io/doors/sourcing-audit/mcp-server.html
 
+## Buyer-side door (free instant buyer check — for exporters)
+- Free instant buyer check: https://lu7897859-tech.github.io/doors/buyer-check/
+- Export-Safety Pack ($19): https://lu7897859-tech.github.io/doors/buyer-check/export-safety-pack.html
+- Screen a new overseas buyer before shipping: domain, business scope, payer name, consignee risk
+
 ## Sourcing guides (blog)
 - All guides: https://lu7897859-tech.github.io/doors/sourcing-audit/blog/
 - https://lu7897859-tech.github.io/doors/sourcing-audit/blog/01-verify-chinese-supplier-2026.html
