@@ -1,40 +1,227 @@
 {
-  "name": "Lunarwave China Sourcing Audit Tools",
-  "description": "Pay-per-call China sourcing intelligence for AI agents: supplier verification $0.03, landed cost $0.02, payment red flags $0.01, audit checklist $0.01, certification check $0.01, full supplier audit $0.08. Free 3 calls per wallet.",
-  "seller": {
-    "wallet": "0x688887dAbd7777589122f383761B397bd46Be707",
-    "network": "eip155:8453"
-  },
-  "endpoints": [
+  "x402Version": "v2",
+  "kind": "resource-server",
+  "resources": [
     {
-      "path": "/verify_supplier",
-      "price": "$0.03",
-      "method": "POST"
+      "resourceUrl": "https://x402-stable-door.lu7897859.workers.dev/verify_supplier",
+      "method": "POST",
+      "description": "Verify whether a Chinese company is a real factory or a trading middleman, using registry, filings, certification and footprint evidence.",
+      "accepts": [
+        {
+          "scheme": "exact",
+          "amount": "30000",
+          "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+          "network": "eip155:8453",
+          "payTo": "0x688887dAbd7777589122f383761B397bd46Be707",
+          "maxTimeoutSeconds": 60,
+          "extra": { "assetTransferMethod": "eip3009", "name": "USDC", "version": "2" }
+        }
+      ],
+      "extensions": {
+        "bazaar": {
+          "info": {
+            "input": {
+              "type": "http",
+              "method": "POST",
+              "bodyType": "json",
+              "body": { "company_name": "Shenzhen Example Electronics Co., Ltd." }
+            },
+            "output": {
+              "type": "json",
+              "example": {
+                "verdict": "real_factory",
+                "confidence": 0.82,
+                "signals": ["business registry match", "export records", "certification issued"],
+                "red_flags": []
+              }
+            }
+          }
+        }
+      }
     },
     {
-      "path": "/landed_cost_calc",
-      "price": "$0.02",
-      "method": "POST"
+      "resourceUrl": "https://x402-stable-door.lu7897859.workers.dev/landed_cost_calc",
+      "method": "POST",
+      "description": "Calculate true landed cost for China to US/EU imports: unit price, freight, duty, VAT and hidden fees.",
+      "accepts": [
+        {
+          "scheme": "exact",
+          "amount": "20000",
+          "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+          "network": "eip155:8453",
+          "payTo": "0x688887dAbd7777589122f383761B397bd46Be707",
+          "maxTimeoutSeconds": 60,
+          "extra": { "assetTransferMethod": "eip3009", "name": "USDC", "version": "2" }
+        }
+      ],
+      "extensions": {
+        "bazaar": {
+          "info": {
+            "input": {
+              "type": "http",
+              "method": "POST",
+              "bodyType": "json",
+              "body": { "unit_price_usd": 12.5, "quantity": 1000, "hs_code": "851762", "destination_country": "US", "incoterm": "FOB" }
+            },
+            "output": {
+              "type": "json",
+              "example": {
+                "landed_unit_cost_usd": 18.42,
+                "breakdown": { "goods": 12500, "freight": 900, "duty": 3200, "vat": 0, "fees": 820 }
+              }
+            }
+          }
+        }
+      }
     },
     {
-      "path": "/payment_red_flags",
-      "price": "$0.01",
-      "method": "POST"
+      "resourceUrl": "https://x402-stable-door.lu7897859.workers.dev/payment_red_flags",
+      "method": "POST",
+      "description": "Screen a supplier payment arrangement for wire-fraud red flags before you send money.",
+      "accepts": [
+        {
+          "scheme": "exact",
+          "amount": "10000",
+          "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+          "network": "eip155:8453",
+          "payTo": "0x688887dAbd7777589122f383761B397bd46Be707",
+          "maxTimeoutSeconds": 60,
+          "extra": { "assetTransferMethod": "eip3009", "name": "USDC", "version": "2" }
+        }
+      ],
+      "extensions": {
+        "bazaar": {
+          "info": {
+            "input": {
+              "type": "http",
+              "method": "POST",
+              "bodyType": "json",
+              "body": { "beneficiary_name": "Example Trading Ltd", "bank_country": "CN", "changed_bank_details": true, "payment_terms": "30% deposit T/T" }
+            },
+            "output": {
+              "type": "json",
+              "example": {
+                "risk_level": "medium",
+                "red_flags": ["bank details changed after contract", "beneficiary name differs from contract party"],
+                "recommended_actions": ["re-verify via a second channel", "request a video call at the factory"]
+              }
+            }
+          }
+        }
+      }
     },
     {
-      "path": "/audit_checklist",
-      "price": "$0.01",
-      "method": "POST"
+      "resourceUrl": "https://x402-stable-door.lu7897859.workers.dev/audit_checklist",
+      "method": "POST",
+      "description": "Generate the complete 7-point pre-payment China sourcing audit checklist for a given product and supplier.",
+      "accepts": [
+        {
+          "scheme": "exact",
+          "amount": "10000",
+          "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+          "network": "eip155:8453",
+          "payTo": "0x688887dAbd7777589122f383761B397bd46Be707",
+          "maxTimeoutSeconds": 60,
+          "extra": { "assetTransferMethod": "eip3009", "name": "USDC", "version": "2" }
+        }
+      ],
+      "extensions": {
+        "bazaar": {
+          "info": {
+            "input": {
+              "type": "http",
+              "method": "POST",
+              "bodyType": "json",
+              "body": { "product_type": "bluetooth speaker", "supplier_name": "Shenzhen Example Electronics Co., Ltd." }
+            },
+            "output": {
+              "type": "json",
+              "example": {
+                "checklist": [
+                  { "step": 1, "item": "Entity existence", "evidence": "business registry lookup" },
+                  { "step": 2, "item": "Factory vs trader", "evidence": "site photos, video call" }
+                ],
+                "total_steps": 7
+              }
+            }
+          }
+        }
+      }
     },
     {
-      "path": "/certification_check",
-      "price": "$0.01",
-      "method": "POST"
+      "resourceUrl": "https://x402-stable-door.lu7897859.workers.dev/certification_check",
+      "method": "POST",
+      "description": "Check which certifications (CE, FCC, FDA and others) a product type needs for EU/US import.",
+      "accepts": [
+        {
+          "scheme": "exact",
+          "amount": "10000",
+          "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+          "network": "eip155:8453",
+          "payTo": "0x688887dAbd7777589122f383761B397bd46Be707",
+          "maxTimeoutSeconds": 60,
+          "extra": { "assetTransferMethod": "eip3009", "name": "USDC", "version": "2" }
+        }
+      ],
+      "extensions": {
+        "bazaar": {
+          "info": {
+            "input": {
+              "type": "http",
+              "method": "POST",
+              "bodyType": "json",
+              "body": { "product_type": "wireless earbuds", "destination_country": "DE" }
+            },
+            "output": {
+              "type": "json",
+              "example": {
+                "required": ["CE (RED)", "RoHS", "WEEE"],
+                "optional": ["GS"],
+                "notes": "Radio equipment also requires an EU declaration of conformity."
+              }
+            }
+          }
+        }
+      }
     },
     {
-      "path": "/full_supplier_audit",
-      "price": "$0.08",
-      "method": "POST"
+      "resourceUrl": "https://x402-stable-door.lu7897859.workers.dev/full_supplier_audit",
+      "method": "POST",
+      "description": "Full-chain China supplier audit in one call: verification, landed cost, payment risk and certification in a single response.",
+      "accepts": [
+        {
+          "scheme": "exact",
+          "amount": "80000",
+          "asset": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+          "network": "eip155:8453",
+          "payTo": "0x688887dAbd7777589122f383761B397bd46Be707",
+          "maxTimeoutSeconds": 60,
+          "extra": { "assetTransferMethod": "eip3009", "name": "USDC", "version": "2" }
+        }
+      ],
+      "extensions": {
+        "bazaar": {
+          "info": {
+            "input": {
+              "type": "http",
+              "method": "POST",
+              "bodyType": "json",
+              "body": { "company_name": "Shenzhen Example Electronics Co., Ltd.", "product_type": "bluetooth speaker", "destination_country": "US", "order_value_usd": 25000 }
+            },
+            "output": {
+              "type": "json",
+              "example": {
+                "verification": { "verdict": "real_factory", "confidence": 0.82 },
+                "landed_cost": { "landed_unit_cost_usd": 18.42 },
+                "payment_risk": { "risk_level": "medium" },
+                "certification": { "required": ["FCC", "UL"] }
+              }
+            }
+          }
+        }
+      }
     }
-  ]
+  ],
+  "docs": "https://x402-stable-door.lu7897859.workers.dev",
+  "updated": "2026-09-11T15:20:00.000Z"
 }
