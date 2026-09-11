@@ -1,0 +1,284 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "China Sourcing Audit Tools",
+    "version": "1.0.0",
+    "description": "AI tools for vetting Chinese suppliers and import risk before money moves: factory-vs-trader verification, landed cost, payment red flags, audit checklist, certification checks, full audit chain. Pay-per-call in USDC on Base via x402.",
+    "x-guidance": "Use POST /verify_supplier with a JSON body containing company_name (and optionally country/usci) to check whether a Chinese company is a real factory or a trading middleman. POST /landed_cost_calc with kg, dimensions (cm), goods value and shipping mode for true landed cost. POST /payment_red_flags with payee details to screen wire-fraud risk before deposit. POST /audit_checklist to generate the pre-payment audit checklist. POST /certification_check with a product type for required certifications. POST /full_supplier_audit with company_name to run the complete audit chain in one call. All endpoints return HTTP 402 with an x402 v2 payment challenge when payment is required.",
+    "contact": {
+      "email": "lu7897859@gmail.com"
+    }
+  },
+  "paths": {
+    "/verify_supplier": {
+      "post": {
+        "operationId": "verifySupplier",
+        "summary": "Verify if a Chinese company is a real factory or trading middleman",
+        "tags": ["Supplier Verification"],
+        "x-payment-info": {
+          "price": { "mode": "fixed", "currency": "USD", "amount": "0.030000" },
+          "protocols": [{ "x402": {} }]
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "company_name": { "type": "string", "description": "Chinese company name or USCI number" },
+                  "country": { "type": "string", "description": "Country of registration, default CN" }
+                },
+                "required": ["company_name"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Verification report",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ok": { "type": "boolean" },
+                    "risk": { "type": "string", "enum": ["LOW", "MEDIUM", "HIGH"] },
+                    "signals": { "type": "array", "items": { "type": "string" } },
+                    "is_factory": { "type": "boolean" }
+                  }
+                }
+              }
+            }
+          },
+          "402": { "description": "Payment Required - x402 challenge" }
+        }
+      }
+    },
+    "/landed_cost_calc": {
+      "post": {
+        "operationId": "landedCostCalc",
+        "summary": "Calculate true landed cost for China to US/EU imports",
+        "tags": ["Landed Cost"],
+        "x-payment-info": {
+          "price": { "mode": "fixed", "currency": "USD", "amount": "0.020000" },
+          "protocols": [{ "x402": {} }]
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "kg": { "type": "number", "description": "Weight in kilograms" },
+                  "length_cm": { "type": "number" },
+                  "width_cm": { "type": "number" },
+                  "height_cm": { "type": "number" },
+                  "goods_value_usd": { "type": "number" },
+                  "shipping_mode": { "type": "string", "enum": ["air", "sea", "express"] }
+                },
+                "required": ["kg", "goods_value_usd", "shipping_mode"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Landed cost breakdown",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "total_landed_cost_usd": { "type": "number" },
+                    "freight_usd": { "type": "number" },
+                    "customs_usd": { "type": "number" },
+                    "breakdown": { "type": "object" }
+                  }
+                }
+              }
+            }
+          },
+          "402": { "description": "Payment Required - x402 challenge" }
+        }
+      }
+    },
+    "/payment_red_flags": {
+      "post": {
+        "operationId": "paymentRedFlags",
+        "summary": "Screen a supplier payment arrangement for wire-fraud red flags",
+        "tags": ["Payment Safety"],
+        "x-payment-info": {
+          "price": { "mode": "fixed", "currency": "USD", "amount": "0.010000" },
+          "protocols": [{ "x402": {} }]
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "payee_name": { "type": "string" },
+                  "payee_account": { "type": "string" },
+                  "contract_party": { "type": "string" },
+                  "deposit_ratio": { "type": "number" }
+                },
+                "required": ["payee_name", "deposit_ratio"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Red flag screening result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "go_no_go": { "type": "string", "enum": ["GO", "NO_GO", "CAUTION"] },
+                    "flags": { "type": "array", "items": { "type": "string" } },
+                    "safe_rules": { "type": "array", "items": { "type": "string" } }
+                  }
+                }
+              }
+            }
+          },
+          "402": { "description": "Payment Required - x402 challenge" }
+        }
+      }
+    },
+    "/audit_checklist": {
+      "post": {
+        "operationId": "auditChecklist",
+        "summary": "Generate the 7-point pre-payment China sourcing audit checklist",
+        "tags": ["Audit"],
+        "x-payment-info": {
+          "price": { "mode": "fixed", "currency": "USD", "amount": "0.010000" },
+          "protocols": [{ "x402": {} }]
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "company_name": { "type": "string" },
+                  "product": { "type": "string" }
+                },
+                "required": ["company_name"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Audit checklist",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "checklist": { "type": "array", "items": { "type": "string" } },
+                    "priority": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "402": { "description": "Payment Required - x402 challenge" }
+        }
+      }
+    },
+    "/certification_check": {
+      "post": {
+        "operationId": "certificationCheck",
+        "summary": "Check required certifications for EU/US import of a product type",
+        "tags": ["Certification"],
+        "x-payment-info": {
+          "price": { "mode": "fixed", "currency": "USD", "amount": "0.010000" },
+          "protocols": [{ "x402": {} }]
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "product_type": { "type": "string" },
+                  "market": { "type": "string", "enum": ["EU", "US"] }
+                },
+                "required": ["product_type", "market"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Certification requirements",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "required_certs": { "type": "array", "items": { "type": "string" } },
+                    "verification_steps": { "type": "array", "items": { "type": "string" } }
+                  }
+                }
+              }
+            }
+          },
+          "402": { "description": "Payment Required - x402 challenge" }
+        }
+      }
+    },
+    "/full_supplier_audit": {
+      "post": {
+        "operationId": "fullSupplierAudit",
+        "summary": "Full-chain China supplier audit in one call",
+        "tags": ["Supplier Verification"],
+        "x-payment-info": {
+          "price": { "mode": "fixed", "currency": "USD", "amount": "0.080000" },
+          "protocols": [{ "x402": {} }]
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "company_name": { "type": "string" },
+                  "product": { "type": "string" }
+                },
+                "required": ["company_name"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Unified risk verdict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "verdict": { "type": "string", "enum": ["HIGH", "MEDIUM", "LOW"] },
+                    "signal_count": { "type": "number" },
+                    "report": { "type": "object" }
+                  }
+                }
+              }
+            }
+          },
+          "402": { "description": "Payment Required - x402 challenge" }
+        }
+      }
+    }
+  }
+}
