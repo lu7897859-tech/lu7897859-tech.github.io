@@ -14,8 +14,8 @@ Lunarwave is a machine-readable intelligence service for AI agents operating in 
 
 ## Access
 
-- MCP: https://certification-conversations-fixed-oak.trycloudflare.com/mcp
-- UCP Audit MCP: https://soldiers-satisfaction-packed-lender.trycloudflare.com/mcp
+- MCP: https://x402-stable-door.lu7897859.workers.dev/mcp
+- UCP Audit MCP: https://x402-stable-door.lu7897859.workers.dev/mcp
 - Payments: x402 protocol, USDC on Base (eip155:8453)
 - Pay-to wallet: 0x688887dAbd7777589122f383761B397bd46Be707
 
