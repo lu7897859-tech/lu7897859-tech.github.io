@@ -1,16 +1,11 @@
 {
   "name": "Lunarwave AI Assets",
-  "description": "China sourcing audit + Shopify UCP store audit MCP servers for AI agents. Supplier verification, landed cost calculation, payment red flags, audit checklists, certification checks, UCP health audits. x402 machine payments.",
+  "description": "China sourcing audit MCP server for AI agents. Supplier verification, landed cost calculation, payment red flags, audit checklists, certification checks. x402 machine payments on Base.",
   "servers": [
     {
       "name": "china-sourcing-audit",
       "description": "China sourcing risk audit: supplier verification, landed cost, payment red flags, audit checklist, certification check, full supplier audit",
-      "url": "https://skating-manhattan-various-unto.trycloudflare.com/mcp"
-    },
-    {
-      "name": "ucp-store-audit",
-      "description": "Shopify UCP (agentic commerce) store health audit",
-      "url": "https://burns-docs-nitrogen-pet.trycloudflare.com/mcp"
+      "url": "https://x402-stable-door.lu7897859.workers.dev/mcp"
     }
   ]
 }
