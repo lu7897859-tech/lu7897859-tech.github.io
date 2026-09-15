@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>免费查工厂美国召回史 · US Recall Check</title>
+<meta name="description" content="输入中国工厂名称，3 秒查美国 CPSC 官方召回库：这家是否真的以自己名义把货卖进美国，有没有公开安全档案。零注册，只看官方公开数据。">
+<meta property="og:title" content="免费查工厂美国召回史">
+<meta property="og:description" content="输入工厂名 → 3 秒出美国召回史判决。零注册。数据源：美国 CPSC 官方公开召回库。">
+<meta property="og:type" content="website">
+<meta name="robots" content="index,follow">
+<style>
+:root{--bg:#0b0d11;--card:#14181f;--line:#232a36;--ink:#eef2f7;--dim:#8d98a8;--ok:#22c55e;--warn:#f59e0b;--danger:#f87171;--accent:#ff8a3d;--radius:14px}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px;width:100%}
+header{padding:18px 0;border-bottom:1px solid var(--line)}
+.logo{font-weight:800;letter-spacing:-.02em;font-size:16px;display:flex;align-items:center;gap:8px}
+.logo .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);display:inline-block}
+main{flex:1;display:flex;flex-direction:column;justify-content:center;padding:40px 0}
+h1{font-size:clamp(25px,4.8vw,38px);line-height:1.16;margin:0 0 10px;letter-spacing:-.03em}
+h1 small{display:block;font-size:clamp(13px,1.8vw,15px);color:var(--dim);font-weight:400;letter-spacing:0;margin-top:8px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-top:22px}
+.row{display:flex;gap:8px}
+input{flex:1;background:#0b0d11;border:1px solid var(--line);color:var(--ink);border-radius:10px;padding:14px 14px;font-size:16px;outline:none}
+input:focus{border-color:var(--accent)}
+button{background:var(--accent);color:#1a0d02;border:0;border-radius:10px;padding:14px 22px;font-size:16px;font-weight:700;cursor:pointer;white-space:nowrap}
+button:disabled{opacity:.6;cursor:wait}
+.hint{color:var(--dim);font-size:13px;margin-top:10px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.chip{background:#0b0d11;border:1px solid var(--line);color:var(--dim);border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer}
+.chip:hover{border-color:var(--accent);color:var(--ink)}
+.result{margin-top:16px;padding:16px;border-radius:var(--radius);border:1px solid var(--line);background:var(--card);display:none}
+.verdict{font-size:clamp(19px,3.2vw,25px);font-weight:800;letter-spacing:-.02em;line-height:1.3}
+.v-ok{color:var(--ok)}.v-warn{color:var(--warn)}.v-dim{color:var(--dim)}.v-danger{color:var(--danger)}
+.meta{color:var(--dim);font-size:13px;margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
+.facts{margin:12px 0 0;padding:0;list-style:none}
+.facts li{padding:6px 0;font-size:15px;border-bottom:1px dashed #1c2129}
+.facts li:last-child{border:0}
+.pay{margin-top:14px;padding:12px 14px;border-radius:10px;background:#1a1206;border:1px solid #3a2a12;font-size:14px;color:#f0c48a}
+.note{color:var(--dim);font-size:12px;margin-top:12px;line-height:1.5}
+.howto{margin-top:12px;padding:12px 14px;border-radius:10px;background:#0b0d11;border:1px solid var(--line);font-size:13px;color:var(--dim);line-height:1.7}
+footer{padding:18px 0;border-top:1px solid var(--line);color:var(--dim);font-size:12px}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid var(--line);border-top-color:var(--accent);border-radius:50%;animation:s .8s linear infinite;vertical-align:-2px;margin-right:6px}
+@keyframes s{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><div class="logo"><span class="dot"></span> US Recall Check · 免费查工厂美国召回史</div></div></header>
+<main><div class="wrap">
+  <h1>这家工厂，真给美国发过货吗？
+    <small>输入工厂名 → 3 秒查美国 CPSC 官方召回库 · 零注册 · 只看官方公开数据</small>
+  </h1>
+
+  <div class="box">
+    <form id="f" class="row" autocomplete="off">
+      <input id="q" placeholder="工厂英文名，例如：Ningbo Iceberg Electronic Appliance" aria-label="工厂名称">
+      <button id="b" type="submit">查一下</button>
+    </form>
+    <div class="chips" id="chips"></div>
+    <div class="hint">不需要注册、不需要登录。查的是美国官方公开召回档案，工厂不会收到通知。</div>
+  </div>
+
+  <div class="result" id="r"></div>
+
+  <div class="howto">
+    <b>为什么这张卡有用？</b><br>
+    1）有召回记录 = 这家确实以自己名义把货卖进了美国 → 可佐证「真出口商」，不是空壳转卖商。<br>
+    2）有召回记录 = 历史上出过安全问题，CPSC 有公开档案 → 下单前你该知道。<br>
+    3）关键看趋势：近 3 年仍有召回 vs 早年一次性事件，性质完全不同。
+  </div>
+
+  <div class="note">
+    ※ 未提及 ≠ 没有，仅表示公开渠道未检索到（可能拼名不同、未直接对美销售、或产品不属 CPSC 管辖）。<br>
+    ※ 本页只陈述美国官方公开召回数据，不作法律意见、不作征信定性。
+  </div>
+</div></main>
+<footer><div class="wrap">数据源：美国消费品安全委员会（CPSC）SaferProducts 公开召回库 · 非法律意见、非征信报告</div></footer>
+
+<script>
+const POOL_URL = 'pool.json';
+let POOL = null;
+
+async function loadPool(){
+  if (POOL) return POOL;
+  try{ const r = await fetch(POOL_URL,{cache:'no-store'}); POOL = await r.json(); }
+  catch(e){ POOL = {items:[],stats:{}}; }
+  return POOL;
+}
+
+const STOP = new Set(['co','ltd','limited','llc','inc','corp','corporation','company','the','of','and','group','holding','holdings','industries','industry','trade','trading','technology','tech','import','export','international','china','chinese','manufacturing']);
+function toks(s){
+  return String(s||'').toLowerCase()
+    .replace(/[（(].*?[）)]/g,' ')
+    .replace(/[^a-z0-9\u4e00-\u9fa5]+/g,' ')
+    .split(' ').filter(t=>t.length>1 && !STOP.has(t));
+}
+
+function match(name){
+  const qt = toks(name);
+  if (!qt.length) return [];
+  const out = [];
+  for (const it of (POOL.items||[])){
+    const ct = new Set(toks(it.name));
+    let inter = 0;
+    for (const t of qt) if (ct.has(t)) inter++;
+    if (!inter) continue;
+    const cov = inter/qt.length;
+    const jac = inter/(qt.length + ct.size - inter);
+    const s = 0.7*cov + 0.3*jac;
+    if (s >= 0.55) out.push([s,it]);
+  }
+  out.sort((a,b)=>b[0]-a[0] || b[1].n - a[1].n);
+  return out;
+}
+
+function esc(s){return String(s||'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+
+function renderHit(score, it){
+  const recent = it.recent || 0;
+  const tone = recent ? 'danger' : 'warn';
+  const line = recent
+    ? `这家工厂在美国官方召回库里有 ${it.n} 条记录，其中近 3 年 ${recent} 条`
+    : `这家工厂在美国官方召回库里有 ${it.n} 条记录（均为早年记录）`;
+  const ev = (it.evidence||[]).map(e=>`<li><b style="color:var(--dim);font-weight:600">召回号</b>：${esc(e.number)}　<b style="color:var(--dim);font-weight:600">日期</b>：${esc(e.date||'—')}<br>${esc(e.title||'')}${e.units?'<br><b style="color:var(--dim);font-weight:600">数量</b>：'+esc(e.units):''}${e.url?'<br><a href="'+esc(e.url)+'" target="_blank" rel="noopener" style="color:var(--accent);font-size:13px">→ 官方原文（可点开复查）</a>':''}</li>`).join('');
+  document.getElementById('r').innerHTML = `
+    <div class="verdict v-${tone}">【${esc(line)}】</div>
+    <div class="meta">匹配主体：${esc(it.name)}${it.country?'（'+esc(it.country)+'）':''} · 匹配度 ${Math.round(score*100)}% · 证据全部来自美国官方公开记录</div>
+    <ul class="facts">${ev}</ul>
+    <div class="pay">完整证据链（全部 ${it.n} 条召回、每条危险类型/数量/官方链接，可转给合伙人/银行）＝ 付 $1.5 / ¥9.9 后给。</div>
+    <div class="note">※ 有召回 ≠ 不可合作。这只是公开安全档案，判断要靠采购标准，不是靠这一张卡。</div>`;
+}
+
+function renderMiss(name){
+  const st = POOL.stats||{};
+  document.getElementById('r').innerHTML = `
+    <div class="verdict v-dim">【这家在美国官方召回库里没有记录】</div>
+    <div class="meta">已检索美国 CPSC 全量公开召回库（${esc(st.totalRecalls||'—')} 条 / ${esc(st.companies||'—')} 家公司 / 含中国相关主体 ${esc(st.cnCompanies||'—')} 家）。</div>
+    <div class="facts">
+      <li>这不等于「没有召回」——可能是：名称拼写不同、未以自己名义在美销售、或产品类别不属 CPSC 管辖。</li>
+      <li>想更进一步？把工厂的<b>英文全称</b>发过来，我们出「出口真实性核验卡」（CPSC 召回史 + 美国海运提单痕迹 + 工商登记）：$9.9 / ¥9.9。</li>
+    </div>
+    <div class="note">※ 试试完整英文全称（含 Co., Ltd.），或换用工商注册名。</div>`;
+}
+
+async function run(name){
+  const r = document.getElementById('r');
+  r.style.display='block';
+  r.innerHTML = '<div class="spin"></div>正在检索美国官方召回库…';
+  await loadPool();
+  const hits = match(name);
+  if (hits.length) return renderHit(hits[0][0], hits[0][1]);
+  renderMiss(name);
+}
+
+(async()=>{
+  const p = await loadPool();
+  const chips = (p.items||[]).slice(0,5).map(x=>`<span class="chip">${esc(String(x.name).slice(0,34))}</span>`).join('');
+  document.getElementById('chips').innerHTML = chips;
+  document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{document.getElementById('q').value=c.textContent;document.getElementById('f').requestSubmit();});
+})();
+
+document.getElementById('f').addEventListener('submit', e=>{
+  e.preventDefault();
+  const name = document.getElementById('q').value.trim();
+  if (name.length < 2) return;
+  run(name);
+});
+</script>
+
+<script>
+document.getElementById('q').value="Ningbo Iceberg Electronic Appliance Co., Ltd.";
+document.getElementById('r').style.display='block';
+document.getElementById('r').innerHTML="\n    <div class=\"verdict v-danger\">【这家工厂在美国官方召回库里有 1 条记录，其中近 3 年 1 条】</div>\n    <div class=\"meta\">匹配主体：Ningbo Iceberg Electronic Appliance Co., Ltd.（China） · 匹配度 100% · 证据全部来自美国官方公开记录</div>\n    <ul class=\"facts\"><li><b style=\"color:var(--dim);font-weight:600\">召回号</b>：26685　<b style=\"color:var(--dim);font-weight:600\">日期</b>：2026-08-13<br>Cooluli Recalls 10-Liter and 15-Liter Minifridges Due to Fire and Burn Hazards<br><b style=\"color:var(--dim);font-weight:600\">数量</b>：About 250,000<br><a href=\"https://www.cpsc.gov/Recalls/2026/Cooluli-Recalls-10-Liter-and-15-Liter-Minifridges-Due-to-Fire-and-Burn-Hazards\" target=\"_blank\" rel=\"noopener\" style=\"color:var(--accent);font-size:13px\">→ 官方原文（可点开复查）</a></li></ul>\n    <div class=\"pay\">完整证据链（全部 1 条召回、每条危险类型/数量/官方链接，可转给合伙人/银行）＝ 付 $1.5 / ¥9.9 后给。</div>\n    <div class=\"note\">※ 有召回 ≠ 不可合作。这只是公开安全档案，判断要靠采购标准，不是靠这一张卡。</div>";
+document.getElementById('chips').innerHTML="<span class=\"chip\">Xianyouxianlichengshaungqiaotouqic</span><span class=\"chip\">Dongguan Hongtu Sports Goods Co. L</span><span class=\"chip\">Victgoal</span><span class=\"chip\">Shenzhenshixingchuangyiyimaoyouxia</span><span class=\"chip\">Lanzhou Xinshi Mingchen Informatio</span>";
+</script></body>
+</html>
