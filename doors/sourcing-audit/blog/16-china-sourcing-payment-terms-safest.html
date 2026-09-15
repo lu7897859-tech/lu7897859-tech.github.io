@@ -240,6 +240,27 @@ pre.out{background:var(--bg2);border:1px solid var(--line);border-radius:10px;pa
       return '❌ Not a structurally valid USCC\n\n'+x.reason+'\n\nTip: paste the 18-character Unified Social Credit Code from the supplier\u2019s business licence, or try the company\u2019s full registered name.';
     }
 
+    // ---- client-side buyer-email / domain checker (seller-side free hook) ----
+    var FREEMAIL = ['gmail.com','googlemail.com','yahoo.com','yahoo.co.uk','hotmail.com','outlook.com','live.com','msn.com','aol.com','icloud.com','me.com','mail.ru','yandex.ru','gmx.com','gmx.net','web.de','zoho.com','protonmail.com','proton.me','163.com','126.com','qq.com','foxmail.com','sina.com','sohu.com','aliyun.com','inbox.com'];
+    function parseDomain(raw){
+      var s = String(raw||'').trim().toLowerCase();
+      s = s.replace(/^mailto:/,'');
+      var at = s.lastIndexOf('@');
+      if(at>=0) s = s.slice(at+1);
+      s = s.replace(/^[a-z]+:\/\//,'').replace(/^www\./,'');
+      return s.split('/')[0].split('?')[0].split(':')[0];
+    }
+    function isValidDomain(d){ return /^([a-z0-9]([a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,}$/.test(d); }
+    function explainDomain(d){
+      if(!isValidDomain(d)){
+        return '❌ Not a valid email domain\n\nPaste the buyer\u2019s email or just the part after the @ (e.g. buyercompany.com).';
+      }
+      if(FREEMAIL.indexOf(d)>=0){
+        return '⚠️ '+d+' is a FREE mailbox.\n\nThis is the single most common tell in buyer-fraud cases: a \u201cnew large buyer\u201d writing from Gmail/Yahoo/163/QQ instead of a company domain. A real company in the UK, EU or US buys through its own registered email domain.\n\nAsk for an email on their registered domain, then re-check it here.';
+      }
+      return '✅ '+d+' is not a free mailbox \u2014 good first sign.\n\nBut a domain alone does not prove the buyer is real. Before you ship or extend credit, check all three:\n  1. Domain age \u2014 a domain registered weeks ago cannot belong to an established buyer.\n  2. Match \u2014 does the site show the same company name, address and officers as the documents they sent you?\n  3. Money path \u2014 does the bank / paying entity name match the registered company, or a third party?\n\nAny mismatch is a red flag. The full buyer report runs all of these with sourced evidence.';
+    }
+
     async function run(){
       var q = (inp.value||'').trim();
       if(!q){ setOut(D.demoEmpty||'Please enter a company name or 18-digit registration number.','err'); return; }
@@ -257,6 +278,12 @@ pre.out{background:var(--bg2);border:1px solid var(--line);border-radius:10px;pa
           if(r.status===200 && j){ setOut(JSON.stringify(j,null,2).substring(0,1400),'ok'); }
           else if(r.status===402){ setOut((D.paywallNote||'Free instant checks used. Get the full verified report to continue.'),'err'); }
           else { setOut('Service returned status '+r.status+'. '+(D.demoFallback||''),'err'); }
+        } else if(D.demoMode === 'domain'){
+          setOut(D.demoBusy||'Checking…','');
+          var d = parseDomain(q);
+          var ok = isValidDomain(d) && FREEMAIL.indexOf(d)<0;
+          setOut(explainDomain(d), ok?'ok':'err');
+          beacon(q, ok?'company-domain':'free-or-invalid');
         } else {
           var x2 = decodeUSCC(q);
           setOut(explain(x2), x2.ok?'ok':'err');
