@@ -1,0 +1,453 @@
+{
+ "builtAt": "2026-09-15T04:23:59.087Z",
+ "count": 22,
+ "note": "公开数据镜像池｜未提及≠没有，仅表示公开渠道未检索到。数据源：公开企业信用索引 + 上市公司公告 + 政府采购公开信息。",
+ "pool": {
+  "Tesla,Inc.": {
+   "name": "Tesla, Inc.",
+   "identified": false,
+   "fields": {
+    "creditCode": null,
+    "legalPerson": null,
+    "capital": null,
+    "founded": null,
+    "status": null
+   },
+   "listed": null,
+   "riskScore": 40,
+   "risks": [
+    {
+     "level": "高",
+     "item": "本次未能在公开索引中确定该主体的可信身份"
+    }
+   ],
+   "notes": [],
+   "sourceCount": 3,
+   "queriedAt": "2026-09-15"
+  },
+  "Tesla": {
+   "name": "Tesla",
+   "identified": false,
+   "fields": {
+    "creditCode": null,
+    "legalPerson": null,
+    "capital": null,
+    "founded": null,
+    "status": null
+   },
+   "listed": null,
+   "riskScore": 40,
+   "risks": [
+    {
+     "level": "高",
+     "item": "本次未能在公开索引中确定该主体的可信身份"
+    }
+   ],
+   "notes": [],
+   "sourceCount": 3,
+   "queriedAt": "2026-09-15"
+  },
+  "东莞坤巨灯饰照明": {
+   "name": "东莞坤巨灯饰照明有限公司",
+   "identified": false,
+   "fields": {
+    "creditCode": null,
+    "legalPerson": "刘怀林",
+    "capital": null,
+    "founded": null,
+    "status": null
+   },
+   "listed": null,
+   "riskScore": 40,
+   "risks": [
+    {
+     "level": "高",
+     "item": "本次未能在公开索引中确定该主体的可信身份"
+    }
+   ],
+   "notes": [],
+   "sourceCount": 3,
+   "queriedAt": "2026-09-15"
+  },
+  "东莞市铭利达精密技术": {
+   "name": "东莞市铭利达精密技术股份有限公司",
+   "identified": true,
+   "fields": {
+    "creditCode": "91440300764970779B",
+    "legalPerson": "陶诚",
+    "capital": null,
+    "founded": null,
+    "status": "存续"
+   },
+   "listed": null,
+   "riskScore": 3,
+   "risks": [],
+   "notes": [
+    "公开索引未发现指向本公司的主要风险标记"
+   ],
+   "sourceCount": 3,
+   "queriedAt": "2026-09-15"
+  },
+  "佛山市三水东南五金电器制品": {
+   "name": "佛山市三水东南五金电器制品有限公司",
+   "identified": true,
+   "fields": {
+    "creditCode": "9144060774171625XG",
+    "legalPerson": "黄权辉",
+    "capital": null,
+    "founded": "2002-07-25",
+    "status": "开业"
+   },
+   "listed": null,
+   "riskScore": 3,
+   "risks": [],
+   "notes": [
+    "公开索引未发现指向本公司的主要风险标记"
+   ],
+   "sourceCount": 3,
+   "queriedAt": "2026-09-15"
+  },
+  "华为技术": {
+   "name": "华为技术有限公司",
+   "identified": true,
+   "fields": {
+    "creditCode": "914403001922038216",
+    "legalPerson": "赵明路",
+    "capital": null,
+    "founded": "1987-09-15",
+    "status": "在营"
+   },
+   "listed": null,
+   "riskScore": 3,
+   "risks": [],
+   "notes": [
+    "公开索引未发现指向本公司的主要风险标记"
+   ],
+   "sourceCount": 3,
+   "queriedAt": "2026-09-14"
+  },
+  "字节跳动": {
+   "name": "字节跳动有限公司",
+   "identified": false,
+   "fields": {
+    "creditCode": null,
+    "legalPerson": null,
+    "capital": null,
+    "founded": null,
+    "status": null
+   },
+   "listed": null,
+   "riskScore": 40,
+   "risks": [
+    {
+     "level": "高",
+     "item": "本次未能在公开索引中确定该主体的可信身份"
+    }
+   ],
+   "notes": [],
+   "sourceCount": 3,
+   "queriedAt": "2026-09-15"
+  },
+  "宁波均胜电子": {
+   "name": "宁波均胜电子股份有限公司",
+   "identified": true,
+   "fields": {
+    "creditCode": "9133020060543096X6",
+    "legalPerson": "王剑峰",
+    "capital": "155077.056300万人民币",
+    "founded": null,
+    "status": null
+   },
+   "listed": "600699",
+   "riskScore": 6,
+   "risks": [],
+   "notes": [
+    "为上市公司（600699），信息披露受强制监管",
+    "公开索引未发现指向本公司的主要风险标记"
+   ],
+   "sourceCount": 3,
+   "queriedAt": "2026-09-15"
+  },
+  "小米科技": {
+   "name": "小米科技有限责任公司",
+   "identified": true,
+   "fields": {
+    "creditCode": "9111010856360262XT",
+    "legalPerson": "雷军",
+    "capital": "185,000万",
+    "founded": "2010-03-03",
+    "status": "开业"
+   },
+   "listed": null,
+   "riskScore": 3,
+   "risks": [],
+   "notes": [
+    "公开索引未发现指向本公司的主要风险标记"
+   ],
+   "sourceCount": 3,
+   "queriedAt": "2026-09-15"
+  },
+  "广东坚朗五金制品": {
+   "name": "广东坚朗五金制品股份有限公司",
+   "identified": true,
+   "fields": {
+    "creditCode": "914419007520851901",
+    "legalPerson": "白宝鲲",
+    "capital": "35,388.5013万",
+    "founded": null,
+    "status": null
+   },
+   "listed": "002791",
+   "riskScore": 6,
+   "risks": [],
+   "notes": [
+    "为上市公司（002791），信息披露受强制监管",
+    "公开索引未发现指向本公司的主要风险标记"
+   ],
+   "sourceCount": 3,
+   "queriedAt": "2026-09-15"
+  },
+  "广东松业电器制造": {
+   "name": "广东松业电器制造有限公司",
+   "identified": true,
+   "fields": {
+    "creditCode": "91440605708118901H",
+    "legalPerson": null,
+    "capital": null,
+    "founded": "1999-02-05",
+    "status": "开业"
+   },
+   "listed": null,
+   "riskScore": 3,
+   "risks": [],
+   "notes": [
+    "公开索引未发现指向本公司的主要风险标记"
+   ],
+   "sourceCount": 3,
+   "queriedAt": "2026-09-15"
+  },
+  "比亚迪": {
+   "name": "比亚迪股份有限公司",
+   "identified": false,
+   "fields": {
+    "creditCode": null,
+    "legalPerson": null,
+    "capital": null,
+    "founded": null,
+    "status": null
+   },
+   "listed": "002594",
+   "riskScore": 43,
+   "risks": [
+    {
+     "level": "高",
+     "item": "本次未能在公开索引中确定该主体的可信身份"
+    }
+   ],
+   "notes": [
+    "为上市公司（002594），信息披露受强制监管"
+   ],
+   "sourceCount": 3,
+   "queriedAt": "2026-09-14"
+  },
+  "江苏恒立液压": {
+   "name": "江苏恒立液压股份有限公司",
+   "identified": true,
+   "fields": {
+    "creditCode": "91320400773797680R",
+    "legalPerson": null,
+    "capital": null,
+    "founded": "2005-06-02",
+    "status": "开业"
+   },
+   "listed": "601100",
+   "riskScore": 6,
+   "risks": [],
+   "notes": [
+    "为上市公司（601100），信息披露受强制监管",
+    "公开索引未发现指向本公司的主要风险标记"
+   ],
+   "sourceCount": 3,
+   "queriedAt": "2026-09-15"
+  },
+  "浙江三花智能控制": {
+   "name": "浙江三花智能控制股份有限公司",
+   "identified": true,
+   "fields": {
+    "creditCode": "913300006096907427",
+    "legalPerson": null,
+    "capital": null,
+    "founded": "1994-09-10",
+    "status": "开业"
+   },
+   "listed": "002050",
+   "riskScore": 6,
+   "risks": [],
+   "notes": [
+    "为上市公司（002050），信息披露受强制监管",
+    "公开索引未发现指向本公司的主要风险标记"
+   ],
+   "sourceCount": 3,
+   "queriedAt": "2026-09-15"
+  },
+  "浙江晶盛机电": {
+   "name": "浙江晶盛机电股份有限公司",
+   "identified": true,
+   "fields": {
+    "creditCode": "913300007964528296",
+    "legalPerson": "曹建伟",
+    "capital": "130953.379700万人民币",
+    "founded": null,
+    "status": null
+   },
+   "listed": "300316",
+   "riskScore": 6,
+   "risks": [],
+   "notes": [
+    "为上市公司（300316），信息披露受强制监管",
+    "公开索引未发现指向本公司的主要风险标记"
+   ],
+   "sourceCount": 3,
+   "queriedAt": "2026-09-15"
+  },
+  "深圳华为技术": {
+   "name": "深圳华为技术有限公司",
+   "identified": false,
+   "fields": {
+    "creditCode": null,
+    "legalPerson": "华为三大外包",
+    "capital": null,
+    "founded": null,
+    "status": null
+   },
+   "listed": null,
+   "riskScore": 40,
+   "risks": [
+    {
+     "level": "高",
+     "item": "本次未能在公开索引中确定该主体的可信身份"
+    }
+   ],
+   "notes": [],
+   "sourceCount": 3,
+   "queriedAt": "2026-09-14"
+  },
+  "深圳市兆威机电": {
+   "name": "深圳市兆威机电股份有限公司",
+   "identified": true,
+   "fields": {
+    "creditCode": "91440300728548191B",
+    "legalPerson": "李平",
+    "capital": null,
+    "founded": "2001-04-19",
+    "status": "存续"
+   },
+   "listed": null,
+   "riskScore": 3,
+   "risks": [],
+   "notes": [
+    "公开索引未发现指向本公司的主要风险标记"
+   ],
+   "sourceCount": 3,
+   "queriedAt": "2026-09-15"
+  },
+  "深圳市华为技术": {
+   "name": "深圳市华为技术有限公司",
+   "identified": true,
+   "fields": {
+    "creditCode": "914403001922038216",
+    "legalPerson": "赵明路",
+    "capital": null,
+    "founded": "1987-09-15",
+    "status": "在营"
+   },
+   "listed": null,
+   "riskScore": 3,
+   "risks": [],
+   "notes": [
+    "公开索引未发现指向本公司的主要风险标记"
+   ],
+   "sourceCount": 3,
+   "queriedAt": "2026-09-14"
+  },
+  "深圳市汇川技术": {
+   "name": "深圳市汇川技术股份有限公司",
+   "identified": false,
+   "fields": {
+    "creditCode": null,
+    "legalPerson": null,
+    "capital": null,
+    "founded": null,
+    "status": null
+   },
+   "listed": null,
+   "riskScore": 40,
+   "risks": [
+    {
+     "level": "高",
+     "item": "本次未能在公开索引中确定该主体的可信身份"
+    }
+   ],
+   "notes": [],
+   "sourceCount": 3,
+   "queriedAt": "2026-09-15"
+  },
+  "深圳市腾讯计算机系统": {
+   "name": "深圳市腾讯计算机系统有限公司",
+   "identified": true,
+   "fields": {
+    "creditCode": "91440300708461136T",
+    "legalPerson": null,
+    "capital": null,
+    "founded": "1998-11-11",
+    "status": "开业"
+   },
+   "listed": null,
+   "riskScore": 3,
+   "risks": [],
+   "notes": [
+    "公开索引未发现指向本公司的主要风险标记"
+   ],
+   "sourceCount": 3,
+   "queriedAt": "2026-09-15"
+  },
+  "腾讯科技": {
+   "name": "腾讯科技（深圳）有限公司",
+   "identified": true,
+   "fields": {
+    "creditCode": "9144030071526726XG",
+    "legalPerson": "马化腾",
+    "capital": "200万美元",
+    "founded": "2000-02-24",
+    "status": "开业"
+   },
+   "listed": null,
+   "riskScore": 3,
+   "risks": [],
+   "notes": [
+    "公开索引未发现指向本公司的主要风险标记"
+   ],
+   "sourceCount": 3,
+   "queriedAt": "2026-09-14"
+  },
+  "阿里巴巴": {
+   "name": "阿里巴巴（中国）有限公司",
+   "identified": true,
+   "fields": {
+    "creditCode": "91330100799655058B",
+    "legalPerson": "蒋芳",
+    "capital": "15460.55039万美元",
+    "founded": "2007-03-26",
+    "status": null
+   },
+   "listed": null,
+   "riskScore": 3,
+   "risks": [],
+   "notes": [
+    "公开索引未发现指向本公司的主要风险标记"
+   ],
+   "sourceCount": 3,
+   "queriedAt": "2026-09-15"
+  }
+ }
+}
