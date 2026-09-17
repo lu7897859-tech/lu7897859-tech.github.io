@@ -222,7 +222,7 @@
     "https://continuous-searched-daughters-feel.trycloudflare.com/mcp"
   ],
   "discovery": {
-    "mcpServerCard": "https://lu7897859-tech.github.io/launch-torch/.well-known/mcp.json",
+    "mcpServerCard": "https://lu7897859-tech.github.io/.well-known/mcp.json",
     "llmsTxt": "https://lu7897859-tech.github.io/launch-torch/llms.txt",
     "sitemap": "https://lu7897859-tech.github.io/launch-torch/sitemap.xml",
     "tunnelRegistry": "https://lu7897859-tech.github.io/tunnel-current.json"
