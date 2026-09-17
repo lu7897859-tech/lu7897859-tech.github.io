@@ -207,7 +207,7 @@
     "network": "base",
     "currency": "USDC",
     "recipient": "0x688887dAbd7777589122f383761B397bd46Be707",
-    "endpoint": "https://x402-stable-door.lu7897859.workers.dev/",
+    "endpoint": "https://shine-affecting-mileage-shape.trycloudflare.com/",
     "freeTier": "3 calls per wallet",
     "pricing": {
       "verify_supplier": "0.03 USDC",
@@ -219,12 +219,12 @@
     "mechanism": "Server responds HTTP 402 Payment Required with X-Payment header when free quota exhausted; client pays USDC via x402 protocol"
   },
   "mcpEndpoints": [
-    "https://x402-stable-door.lu7897859.workers.dev/mcp",
-    "https://x402-stable-door.lu7897859.workers.dev/mcp"
+    "https://shine-affecting-mileage-shape.trycloudflare.com/mcp"
   ],
   "discovery": {
-    "mcpServerCard": "https://lu7897859-tech.github.io/launch-torch/.well-known/mcp.json",
+    "mcpServerCard": "https://lu7897859-tech.github.io/.well-known/mcp.json",
     "llmsTxt": "https://lu7897859-tech.github.io/launch-torch/llms.txt",
-    "sitemap": "https://lu7897859-tech.github.io/launch-torch/sitemap.xml"
+    "sitemap": "https://lu7897859-tech.github.io/launch-torch/sitemap.xml",
+    "tunnelRegistry": "https://lu7897859-tech.github.io/tunnel-current.json"
   }
 }
