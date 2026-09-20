@@ -1,4 +1,5 @@
-User-agent: *
+﻿User-agent: *
 Allow: /
 Sitemap: https://lu7897859-tech.github.io/sitemap.xml
 Crawl-delay: 10
+Sitemap: https://lu7897859-tech.github.io/doors/pseo/sitemap.xml
