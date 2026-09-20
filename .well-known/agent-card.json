@@ -207,7 +207,7 @@
     "network": "base",
     "currency": "USDC",
     "recipient": "0x688887dAbd7777589122f383761B397bd46Be707",
-    "endpoint": "https://cape-oral-wto-controversial.trycloudflare.com/",
+    "endpoint": "https://extent-nest-zus-medal.trycloudflare.com/",
     "freeTier": "3 calls per wallet",
     "pricing": {
       "verify_supplier": "0.03 USDC",
@@ -219,7 +219,7 @@
     "mechanism": "Server responds HTTP 402 Payment Required with X-Payment header when free quota exhausted; client pays USDC via x402 protocol"
   },
   "mcpEndpoints": [
-    "https://cape-oral-wto-controversial.trycloudflare.com/mcp"
+    "https://extent-nest-zus-medal.trycloudflare.com/mcp"
   ],
   "discovery": {
     "mcpServerCard": "https://lu7897859-tech.github.io/.well-known/mcp.json",
