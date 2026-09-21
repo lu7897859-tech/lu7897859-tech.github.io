@@ -1,13 +1,13 @@
 {
   "name": "Lunarwave AI Assets: China Sourcing Audit + UCP Store Audit",
   "description": "AI agent that audits China sourcing risks: detects fake factories, gold-supplier badge fraud, sample switching, payment hijacking, customs/HS misclassification, and freight cost traps. Produces actionable checklists and red-flag reports for importers placing $5k-$50k first orders. Also diagnoses why AI automation pipelines fail to produce — agent workflows, rule systems, and automation stacks that quietly break. Free checklist funnel: https://lunarwave8803.gumroad.com/l/yxgrvw (free) → Trusted Supplier Architecture $14 (https://lunarwave8803.gumroad.com/l/kbgmsy) → China Business Bundle $79 (https://lunarwave8803.gumroad.com/l/ijpnuw).",
-  "url": "https://lu7897859-tech.github.io/llms.txt",
+  "url": "https://lunarwave8803.gumroad.com/l/yxgrvw",
   "version": "2.3.0",
   "provider": {
     "organization": "ABOS",
-    "url": "https://lu7897859-tech.github.io/llms.txt"
+    "url": "https://lu7897859-tech.github.io/launch-torch/"
   },
-  "documentationUrl": "https://lu7897859-tech.github.io/llms.txt",
+  "documentationUrl": "https://lu7897859-tech.github.io/launch-torch/",
   "capabilities": {
     "streaming": false,
     "pushNotifications": false,
@@ -24,6 +24,29 @@
     "application/pdf"
   ],
   "skills": [
+    {
+      "id": "supplier-verification",
+      "name": "Supplier Verification Audit",
+      "description": "Verifies whether a Chinese supplier is a real factory or a trading company/middleman: registry check (business license scope, registered capital, abnormal list), gold-supplier badge authenticity, payment routing red flags (personal accounts, uncle's company), and verification steps importers can run in under 30 minutes.",
+      "tags": [
+        "china-sourcing",
+        "supplier-verification",
+        "factory-audit",
+        "fraud-detection"
+      ],
+      "examples": [
+        "Check if this Alibaba supplier is a real factory: [supplier link]",
+        "The factory asked me to wire 30% deposit to a personal account - is this a red flag?",
+        "How do I verify a Chinese company before placing my first order?"
+      ],
+      "inputModes": [
+        "text/plain"
+      ],
+      "outputModes": [
+        "text/plain",
+        "application/pdf"
+      ]
+    },
     {
       "id": "customs-cost-audit",
       "name": "Customs & Landed Cost Audit",
@@ -140,66 +163,6 @@
       "outputModes": [
         "text/plain"
       ]
-    },
-    {
-      "id": "landed_cost_calc",
-      "name": "Landed Cost Calculation",
-      "description": "Before quoting a US retail price: turns unit cost, freight, duty and fees into a per-unit landed cost. $0.02/call.",
-      "tags": [
-        "china-sourcing",
-        "import",
-        "agent-tool"
-      ]
-    },
-    {
-      "id": "payment_red_flags",
-      "name": "Payment Red Flag Screen",
-      "description": "Before your user wires a deposit to a supplier: screens the payment terms against a red-flag list. $0.01/call.",
-      "tags": [
-        "china-sourcing",
-        "import",
-        "agent-tool"
-      ]
-    },
-    {
-      "id": "audit_checklist",
-      "name": "Pre-Payment Audit Checklist",
-      "description": "Before paying a first-time supplier: returns a pre-payment audit checklist to walk with your user. $0.01/call.",
-      "tags": [
-        "china-sourcing",
-        "import",
-        "agent-tool"
-      ]
-    },
-    {
-      "id": "certification_check",
-      "name": "Certification Check",
-      "description": "When a product category is picked: returns the US import certifications and paperwork to check. $0.01/call.",
-      "tags": [
-        "china-sourcing",
-        "import",
-        "agent-tool"
-      ]
-    },
-    {
-      "id": "cpsc_recall_history",
-      "name": "CPSC Recall History",
-      "description": "Before listing a consumer product: searches CPSC recall history for that brand or category. $0.02/call.",
-      "tags": [
-        "china-sourcing",
-        "import",
-        "agent-tool"
-      ]
-    },
-    {
-      "id": "export_portrait_card",
-      "name": "Export Portrait Card (free)",
-      "description": "When a user first names a supplier: builds a one-page company portrait card, free, before any paid check. $0.",
-      "tags": [
-        "china-sourcing",
-        "import",
-        "agent-tool"
-      ]
     }
   ],
   "products": [
@@ -247,6 +210,7 @@
     "endpoint": "https://entitled-posted-yen-deadline.trycloudflare.com/",
     "freeTier": "3 calls per wallet",
     "pricing": {
+      "verify_supplier": "0.03 USDC",
       "landed_cost_calc": "0.02 USDC",
       "payment_red_flags": "0.01 USDC",
       "audit_checklist": "0.01 USDC",
@@ -255,12 +219,12 @@
     "mechanism": "Server responds HTTP 402 Payment Required with X-Payment header when free quota exhausted; client pays USDC via x402 protocol"
   },
   "mcpEndpoints": [
-    "https://laundry-aspects-steve-engineers.trycloudflare.com/mcp"
+    "https://entitled-posted-yen-deadline.trycloudflare.com/mcp"
   ],
   "discovery": {
     "mcpServerCard": "https://lu7897859-tech.github.io/.well-known/mcp.json",
-    "llmsTxt": "https://lu7897859-tech.github.io/llms.txt",
-    "agentCard": "https://lu7897859-tech.github.io/.well-known/agent-card.json",
+    "llmsTxt": "https://lu7897859-tech.github.io/launch-torch/llms.txt",
+    "sitemap": "https://lu7897859-tech.github.io/launch-torch/sitemap.xml",
     "tunnelRegistry": "https://lu7897859-tech.github.io/tunnel-current.json"
   }
 }
