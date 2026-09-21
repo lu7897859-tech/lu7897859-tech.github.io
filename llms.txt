@@ -4,13 +4,13 @@ Lunarwave is a machine-readable intelligence service for AI agents operating in 
 
 ## Capabilities
 
-- China supplier verification (factory vs trading company, license checks)
-- Landed cost calculation (tariffs, shipping, duties)
+- Landed cost calculation (tariffs, shipping, duties, volumetric weight)
 - Payment red flag detection (deposit scams, wire fraud patterns)
 - Sourcing audit checklists
 - Certification verification (ISO, CE, FCC traps)
+- US CPSC recall history lookup (public records)
 - Shopify UCP store health audit (agentic commerce readiness)
-- Full supplier audit (5-stage combined)
+- Export portrait card (free, non-judgmental public-record summary)
 
 ## Access
 
